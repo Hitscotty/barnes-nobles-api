@@ -1,0 +1,2752 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta content="width=device-width" name="viewport">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="Barnes &amp; Noble">
+<title>Barnes & Noble Classics | Barnes &amp; Noble&reg;</title>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@BNBuzz" />
+<meta property="og:title" content="Barnes & Noble Classics"/>
+<meta property="og:type" content="product"/>
+<meta property="og:url" content="http://www.barnesandnoble.com/b/barnes-noble-classics/_/N-rqv"/>
+<meta property="og:site_name" content="Barnes &amp; Noble"/>
+<link rel="icon" type="image/x-icon" href="//img.images-bn.com/static/img/favicon.ico" />
+<link rel="icon" sizes="192x192" href="//img.images-bn.com/static/img/bn-icon-192x192.png">
+<meta name="apple-mobile-web-app-title" content="Barnes & Noble">
+<link rel="apple-touch-icon" href="//img.images-bn.com/static/img/iphone-icon.png"/>
+<link rel="apple-touch-icon" sizes="72x72" href="//img.images-bn.com/static/img/bn-icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="//img.images-bn.com/static/img/bn-icon-114x114.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="//img.images-bn.com/static/img/bn-icon-180x180.png" />
+<link rel="stylesheet" href="/static/release/css/fonts.min.css" />
+<link rel="stylesheet" type="text/css" href="//css.css-bn.com/static/release/css/concat.min.css?v3.16.9&setviewtype=full" />
+<link href="//css.css-bn.com/static/release/css/category/category.min.css?v3.16.9" rel="stylesheet" media="screen">
+<link href="//css.css-bn.com/static/release/css/category/search.min.css?v3.16.9" rel="stylesheet" media="screen">
+<style>
+
+@-webkit-keyframes bugfix { from { padding: 0px; } to { padding: 0px; } }
+label span { -webkit-animation: bugfix infinite 1ms; }
+</style>
+<script>
+var SITE_PROTOCOL = document.location.protocol||window.location.protocol||'http:',
+SITE_DOMAIN = document.location.hostname||window.location.hostname||'www.barnesandnoble.com',
+SITE_PORT = document.location.port||window.location.port||'80',
+THIS_PATH = document.location.pathname||window.location.pathname||'/cartridges/PageSlot/PageSlot.jsp',
+SITE_DOMAIN_URL = THIS_PAGE = SITE_ROOT = port = "",
+STATIC_ASSETS_PATH = "/static",
+webContextRoot ='',
+staticAssetVersion = '?v3.16.9',
+XHR_FOLDER ='/xhr',
+XHR_HANDLER_PATH = XHR_FOLDER+'/handler.jsp',
+PAGE_DEBUG_MODE = false;
+if(SITE_PROTOCOL=="https:") {
+XHR_FOLDER = '/xhr';
+XHR_HANDLER_PATH = XHR_FOLDER+'/handler.jsp';
+}
+if(SITE_PORT.length > 0 && SITE_PORT!=80)
+port = ":"+SITE_PORT;
+SITE_DOMAIN_URL = SITE_PROTOCOL + "//" + SITE_DOMAIN + port;
+SITE_ROOT = SITE_DOMAIN_URL + webContextRoot;
+THIS_PAGE = SITE_DOMAIN_URL + THIS_PATH;
+port = null;
+function consoleLog() {
+if (PAGE_DEBUG_MODE!==true) return;
+if (typeof console != "undefined" && typeof console.log != "undefined") {
+if (typeof console.log.apply != "undefined") {
+console.log.apply(console,arguments);
+} else {
+for(var i=0;i<arguments.length;i++) {
+var arg = arguments[i];
+console.log(arg);
+}
+}
+}
+}
+function consoleWarn() {
+if (PAGE_DEBUG_MODE!==true) return;
+if (typeof console == "undefined") return;
+if (typeof console.warn != "undefined" && typeof console.warn.apply != "undefined") {
+console.warn.apply(console,arguments);
+} else {
+consoleLog.apply(console,arguments);
+}
+}
+function consoleError() {
+if (PAGE_DEBUG_MODE!==true) return;
+if (typeof console == "undefined") return;
+if (typeof console.error != "undefined" && typeof console.error.apply != "undefined") {
+console.error.apply(console,arguments);
+} else {
+consoleWarn.apply(console,arguments);
+}
+}
+var verifyCallbackToCaptcha = function() {
+grecaptcha.render('html_element', {
+'sitekey' : '6LctFgsTAAAAAJXPN_lYrGuAQiN8KDE_W84nWsjc',
+'expired-callback': function(){
+consoleLog("verify reset");
+grecaptcha.reset();
+}
+});
+};
+function addOnLoadEvent(func) {
+var oldonload = window.onload;
+if (typeof window.onload != 'function') {
+window.onload = func;
+} else {
+window.onload = function() {
+if (oldonload) {
+oldonload();
+}
+func();
+}
+}
+}
+</script>
+<script src="//js.js-bn.com/static/js/vendor/jquery-1.8.3.min.js?v3.16.9"></script>
+<script>
+function updateMiniCartCount(count) {
+if(typeof count != 'undefined' && count != $.trim($('#bagTotal').text())) {
+$('#bagTotal').text(count);
+}
+}
+function miniCartEvents($container) {
+var $spinner = $('<div/>').addClass('mini-cart-spinner'),
+$quantityUpdateForms = $('.mini-cart-quantity-update');
+BN.MiniCart = new MiniCart('#miniCart', '#shoppingBag');
+// shopping bag flyout only
+$('#bagContentsContainer').find('.mini-cart-quantity-update').each(function() {
+BN.uXHR.Form.apply(this);
+});
+$quantityUpdateForms.find('.product-quantity').each(function() {
+var $this = $(this);
+$this.data('initial-value', $this.val());
+});
+$quantityUpdateForms.find('input[type=submit]').on('click', function(e) {
+var $theForm = $(this).closest('form'),
+$eleProductQuantity = $theForm.find('.product-quantity').first(),
+productQuantity = $eleProductQuantity.length ? $eleProductQuantity.val().trim() : '';
+if (productQuantity.length == 0) {
+e.preventDefault();
+/* reset to the initial quantity if the user tried to submit an empty value */
+if ($eleProductQuantity.length && $eleProductQuantity.data('initial-value')) {
+$eleProductQuantity.val($eleProductQuantity.data('initial-value'));
+}
+}
+});
+$quantityUpdateForms.on('submit', function() {
+var $this = $(this),
+$miniCartItem = $this.parents('#miniCart');
+$spinner.appendTo($miniCartItem);
+}).on('amplifiFormSuccess', function(e, response) {
+//Adobe Analytics: updates cart object
+if(typeof s_setP !== 'undefined') updateAnalyticsCart();
+// check to shopping bag reload flag is on page
+// if shopping bag is updated in dropdown and page
+// contains the items, it must be refreshed
+if ($("#shoppingBagReloadFlag").length){
+consoleLog("Reload Page to update shopping bag.");
+location.reload(true);
+} else {
+$('#miniCartItems .miniCartItems-list').load(webContextRoot+"/checkout/includes/get-mini-cart-commerce-items.jsp", miniCartEvents);
+$('#subtotalLine .subtotal-amount').html('$'+response.data.subtotal);
+$('#subtotalLine .item-count').html('('+response.data.totalQuantity+' items)');
+$('#bagTotal').html(response.data.totalQuantity);
+if(response.data.totalQuantity < 1) {
+//DONT SHOW CART IF TYPE AHEAD IS OPEN
+if($('#headSearchTypeAheadHolder').is(':visible')) {
+loadHeaderElement($("#bagContentsContainer"), webContextRoot+"/includes/shopping-bag.jsp", true, true);
+} else {
+loadHeaderElement($("#bagContentsContainer"), webContextRoot+"/includes/shopping-bag.jsp", true, false);
+}
+}
+}
+$spinner.remove();
+if(e.target.id && /remove/i.test(e.target.id) || $(this).data('form-type') === 'remove') {
+$(this).trigger('analytics-mini-cart-remove');
+} else {
+$(this).trigger('analytics-mini-cart-add');
+}
+}).on('amplifiFormError', function(e, response) {
+$spinner.remove();
+});
+}
+function loadHeaderElement($container, frag, miniCartLoaded, hideCart) {
+$.ajax({
+url: frag,
+cache: false,
+type: "get",
+beforeSend: function() {
+if(!$('#miniCart').length) {
+if (hideCart) {
+$container.html('<div id="miniCart" style="height: 150px; display:none;"><div class="triangle-up"></div><div class="mini-cart-spinner"></div>');
+$container.attr("aria-hidden", "true");
+} else {
+$container.html('<div id="miniCart" style="height: 150px"><div class="triangle-up"></div><div class="mini-cart-spinner"></div>');
+$container.attr("aria-hidden", "false");
+}
+}
+}
+}).done(function(data) {
+$container.html(data);
+if (hideCart) {
+$("#miniCart").css("display", "none");
+}
+if (miniCartLoaded) {
+updateMiniCartCount($('#miniCartQuantityVal').val());
+miniCartEvents();
+}
+});
+}
+function displayHeaderFooterData(dataObj) {
+try {
+if(typeof dataObj != 'undefined' && dataObj != '') {
+//set login status variables
+if(typeof BN != 'undefined') {
+BN.isExplicitlyLoggedIn = dataObj.isSecureLogin;
+BN.isSoftLoggedIn = dataObj.isSoftLoggedIn;
+} else {
+$(document).ready(function() {
+BN.isExplicitlyLoggedIn = dataObj.isSecureLogin;
+BN.isSoftLoggedIn = dataObj.isSoftLoggedIn;
+});
+}
+//populate sign in/account links data
+$('#authBar').html(dataObj.signInHtml);
+$('#myAccountMenu').html(dataObj.accountLinksHtml);
+updateMiniCartCount(dataObj.cartQuantity);
+HEADERLOADED = true;
+HEADERDATA = '';
+bnLoggingEnabled = dataObj.bnLoggingEnabled;
+$("#myAccountMenu").click(function(e) {
+if($(e.target).attr('id') == 'myAccountLink')
+e.preventDefault();
+$("#myAccountLinks").toggleClass("showMyAccountLinks");
+});
+}
+} catch(err) {
+console.log(err);
+}
+}
+function loadEmailSignUp() {
+// check for email signup class in CQ template
+if ($(".global-footer-email-signup").length){
+// bind form to framework
+var $form = $('#emailSignupForm');
+BN.Validate.Listen($form);
+BN.uXHR.Form.apply($form);
+// success action
+$('#emailSignupForm').on('amplifiFormSuccess', function() {
+$('#emailSignupDiv').html("<span>Thank you for submitting your email address.</span>");
+$('.global-footer-email-signup').find('.mini-cart-spinner').remove();
+}).on("amplifiFormBeforeSerialize", function(){
+$('#emailSignupForm').find('.handler-email-signup').remove();
+$('#emailSignupForm').append('<input class="handler-email-signup" type="hidden" name="amplifiHandler" value="/atg/userprofiling/ProfileFormHandler.emailSignup">');
+}).on("amplifiFormError",function(event,err,xhr,status,msgs){
+var errors = msgs.items;
+BN.Validate.DisplayErrors(this, errors);
+$form.find('input[type=text]').addClass('user-error');
+$('.global-footer-email-signup').find('.mini-cart-spinner').remove();
+}).on("amplifiFormBeforeSubmit",function(){
+consoleLog("Calling displaySpinner");
+$form.find('input[type=text]').removeClass('user-error');
+$('.global-footer-email-signup').append($('<div/>').addClass('mini-cart-spinner'));
+});
+}
+}
+function populateEmailSignUp(data) {
+$(document).ready(function() {
+$('#emailAddr').val(data.email);
+});
+}
+//load header elements for akamai caching
+//SIGN IN Links, PTA Link, EMAIL SIGN UP, CART DETAILS
+function loadDynamicHeaderElements(callback) {
+$.ajax({
+url: '/xhr/header-footer-data.jsp',
+cache: false,
+type: "get",
+dataType: 'json'
+}).done(function(data) {
+HEADERDATA = data;
+HEADERLOADED = false;
+if($('#userLinks').length) {
+displayHeaderFooterData(HEADERDATA);
+} else {
+$(document).ready(function() {
+displayHeaderFooterData(HEADERDATA);
+});
+}
+populateEmailSignUp(data);
+});
+$(document).ready(function() {
+loadEmailSignUp();
+miniCartEvents();
+});
+}
+</script>
+<script>
+
+loadDynamicHeaderElements();
+</script>
+<script src="//js.js-bn.com/static/release/js/head.js?v3.16.9"></script><script src="//js.js-bn.com/static/js/vendor/js-webshim-1.15/dev/extras/modernizr-custom.js?v3.16.9"></script>
+<script src="//js.js-bn.com/static/js/vendor/js-webshim-1.15/dev/polyfiller.js?v3.16.9"></script>
+<script src="//assets.adobedtm.com/a6ce917b5fc2d1d613b7b801115955bcaacab070/satelliteLib-c247216a2145ee58039f29269709adbc59bd1aa8.js"></script>
+<script src="https://cdns.gigya.com/JS/socialize.js?apiKey=3_MD_HJHUOCjSeK80xcc1NTYJYTlZXtSSDOc3XHyRvw6dcljSs4YVf8OInYiEPtpeE" type="text/javascript">
+{
+siteName: 'barnesandnoble.com',
+enabledProviders: 'facebook,twitter,googleplus'
+}
+</script>
+<script>
+var enableGoogleAdsAfterPageLoad = true;
+var bodyClass = "landingPage";
+
+var asyncRelatedAdsEnabled = true;
+$(document).on('googleRelatedAdsLoaded', function() {
+
+googletag.cmd.push(function() {
+// Double check the bodyClass from header-javascript variable
+if(bodyClass.indexOf('searchResultsPage') >= 0 || bodyClass == 'landingPage searchResultsPage') {
+bodyClass = 'searchResultsPage';
+}
+switch (bodyClass) {
+case 'pdpPage':
+var adSlot1 = googletag.defineSlot('/9885823/lia.barnesandnoble/prod/Barnes-Noble-Classics', [300, 250], 'relatedAd')
+.setTargeting('member','F')
+.setTargeting('lo','mid')
+.setTargeting('s','bn')
+.setTargeting('EAN','')
+.setTargeting('redflag','0')
+.setTargeting('prod','');
+var adSlot2 = googletag.defineSlot('/9885823/lia.barnesandnoble/prod/Barnes-Noble-Classics', [728, 90], 'relatedAd2')
+.setTargeting('member','F')
+.setTargeting('lo','mid')
+.setTargeting('s','bn')
+.setTargeting('EAN','')
+.setTargeting('redflag','0')
+.setTargeting('prod','');
+break;
+case 'landingPage':
+var adSlot1 = googletag.defineSlot('/9885823/lia.barnesandnoble/home/Barnes-Noble-Classics', [160, 600], 'relatedAd');
+var adSlot2 = googletag.defineSlot('/9885823/lia.barnesandnoble/home/Barnes-Noble-Classics', [728, 90], 'relatedAd2');
+break;
+case 'searchResultsPage':
+var adSlot1 = googletag.defineSlot('/9885823/lia.barnesandnoble/search/Barnes-Noble-Classics', [160, 600], 'relatedAd');
+var adSlot2 = googletag.defineSlot('/9885823/lia.barnesandnoble/search/Barnes-Noble-Classics', [728, 90], 'relatedAd2');
+break;
+case 'thank-you':
+var adSlot1 = googletag.defineSlot('/9885823/lia.barnesandnoble/thank_you_page', [970, 250], 'relatedAd');
+break;
+default :
+break;
+}
+if(adSlot1) {
+adSlot1.addService(googletag.pubads());
+}
+if(adSlot2) {
+adSlot2.addService(googletag.pubads());
+}
+googletag.pubads().addEventListener('slotRenderEnded', function(event) {
+if(event.size[0] !== 728) {
+$(document).trigger('rendered-slot1');
+} else {
+$(document).trigger('rendered-slot2');
+}
+});
+googletag.enableServices();
+$(document).trigger('googleRelatedAdsEnabled');
+});
+
+})
+</script>
+<script type="text/javascript">
+var asyncTextAdsEnabled = true;
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+$('#primaryNav').on('hover touchstart', function() {
+$('.nav-menu').css('display', 'block');
+});
+});
+function set_cookie (cvalue) {
+
+var cname = "internalCampaign";
+cvalue = cvalue.replace(/ /gi,'-').replace(/[`~!@#^&*()|+\=÷¿?;:'",<>\{\}\[\]\\\/]/gi, '').toLowerCase()
+cvalue = 'tcbp_' +  cvalue;
+//cvalue = encodeURI(cvalue);
+var d = new Date();
+d.setTime(d.getTime() + (1*24*60*60*1000));
+var curCookie = cname + "=" + cvalue +
+"; expires=" + d.toGMTString() +
+"; path=" + "/"  +
+"; domain=" + SITE_DOMAIN;
+document.cookie = curCookie;
+
+}
+</script>
+<script>window['adrum-start-time'] = new Date().getTime();</script>
+<!-- ATG-10336 Tactical fix starts -->
+<link rel="canonical" href="http://www.barnesandnoble.com/b/barnes-noble-classics/_/N-rqv">
+<!-- ATG-10336 Tactical fix starts -->
+<link rel="alternate" media="only screen and (max-width: 640px)" href="http://www.barnesandnoble.com/mobile/b/barnes-noble-classics/_/N-rqv">
+
+                    <script type="text/javascript">
+                      var w=window;
+                      if(w.performance||w.mozPerformance||w.msPerformance||w.webkitPerformance){var d=document,AKSB=AKSB||{};AKSB.q=[];AKSB.mark=function(a,b){AKSB.q.push(["mark",a,b||(new Date).getTime()])};AKSB.measure=function(a,b,c){AKSB.q.push(["measure",a,b,c||(new Date).getTime()])};AKSB.done=function(a){AKSB.q.push(["done",a])};AKSB.mark("firstbyte",(new Date).getTime());AKSB.prof={custid:"91984",ustr:"UNKNOWN",originlat:0,clientrtt:20,ghostip:"184.26.44.43",
+                      ipv6:false,pct:10,clientip:"69.119.31.179",requestid:"d9ed5",protocol:"",blver:10,akM:"a",akN:"ae",akTT:"O",akTX:"1",akTI:"d9ed5",ai:"238807",ra:"",pmgn:"",pmgi:"",pmp:""};(function(a){var b=
+                      d.createElement("script");b.async="async";b.src=a;a=d.getElementsByTagName("script");a=a[a.length-1];a.parentNode.insertBefore(b,a)})(("https:"===d.location.protocol?"https:":"http:")+"//ds-aksb-a.akamaihd.net/aksb.min.js")};
+                    </script>
+                    </head>
+<!--[if lt IE 9]>         <body  class="landingPage lt-ie9"> <![endif]-->
+<!--[if IE 9]>         <body  class="landingPage ie9"> <![endif]-->
+<!--[if gt IE 9]><!--> <body  class="landingPage"> <!--<![endif]-->
+<header id="globalHeader" >
+<section id="logoAndSearch">
+<div id="logoContainer" class="image-class-default" >
+<a href="/"><span class="viewport-bounce">Barnes &amp; Noble</span></a>
+</div>
+<form id="searchForm" name="searchFormName" action="/includes/submit.jsp;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?_DARGS=/cartridges/HeaderSearchBox/HeaderSearchBox.jsp" method="post"><input name="_dyncharset" value="UTF-8" type="hidden"></input><input value="6531189204488996715" type="hidden"></input><input name="/com/bn/endeca/base/SearchFormHandler.searchSuccessURL" value="/s/" type="hidden"><input name="_D:/com/bn/endeca/base/SearchFormHandler.searchSuccessURL" value=" " type="hidden"><input name="/com/bn/endeca/base/SearchFormHandler.searchErrorURL" value="/s/" type="hidden"><input name="_D:/com/bn/endeca/base/SearchFormHandler.searchErrorURL" value=" " type="hidden"><input data-autosuggesturl="//complete.barnesandnoble.com/www/search" placeholder="Search" aria-autocomplete="list" type="text" autocomplete="off" aria-owns="headSearchTypeAheadHolder" data-maxautosuggestcount="8" id="searchBarBN" name="Ntt" value="" role="combobox" data-mininputcharactercount="2" aria-expanded="false"><input name="_D:Ntt" value=" " type="hidden"><input type="hidden" id="typeAheadValue" name="typeAheadValue" value=""/>
+<input name="_D:/com/bn/endeca/base/SearchFormHandler.fs" value=" " type="hidden"></input><select id="searchFilterSelect" name="/com/bn/endeca/base/SearchFormHandler.fs"><option value="0">All<option value="8q8">Books<option value="8qa">NOOK Books<option value="1pbl">NOOK<option value="8q9">Textbooks<option value="8qb">Bargain Books<option value="8qe">Newsstand<option value="8qd">Teens<option value="8qc">Kids<option value="8qf">Toys &amp; Games<option value="1gls">Hobbies &amp; Collectibles<option value="8qg">Home &amp; Gifts<option value="8qh">Movies &amp; TV<option value="8qi">Music</select><input id="searchSubmit" title="search" name="/com/bn/endeca/base/SearchFormHandler.search" value="" type="submit"><input name="_D:/com/bn/endeca/base/SearchFormHandler.search" value=" " type="hidden"><input name="_DARGS" value="/cartridges/HeaderSearchBox/HeaderSearchBox.jsp" type="hidden"></input></form><div id="free-shipping-global-header">
+Spend $25, Get<br />Free Shipping
+</div>
+<div id="shoppingBag" class="image-class-default" tabindex="0" >
+<a href="/checkout/" id="shoppingBagLink" rel="nofollow" role="menu">
+<span class="hide-content">shopping bag count</span><div id="bagTotal"></div>
+</a>
+<div id="bagContentsContainer" aria-hidden="true"></div>
+</div>
+</section>
+<nav id="userLinks">
+<span id="authBar"></span>
+<div id="myAccountMenu"></div>
+<script>
+if(typeof HEADERLOADED != 'undefined' && !HEADERLOADED) {
+displayHeaderFooterData(HEADERDATA);
+}
+</script>
+<input id="chatPtaURL" type="hidden" value="https://help.barnesandnoble.com/app/chat/chat_launch" />
+<aside id="utilityLinks">
+<ul id="upsellPromo">
+<li><!-- Internal Component Tracking - Begin -->
+<!-- Internal Component Tracking - End -->
+<a href="/h/holiday-gift-guide" onclick="set_cookie('pc_Shop the Holiday Gift Guide_na_text');"><span class="default-utility">Shop the Holiday Gift Guide</span>&nbsp;<span class="default-utility"></span></a>
+</li>
+<li><!-- Internal Component Tracking - Begin -->
+<!-- Internal Component Tracking - End -->
+<a href="/h/coupons-deals" onclick="set_cookie('pc_Get 25% Off Any Item: Use Code 25BNFRIENDS_na_text');"><span class="default-utility">Get 25% Off Any Item: Use Code 25BNFRIENDS</span>&nbsp;<span class="default-utility"></span></a>
+</li>
+<li><!-- Internal Component Tracking - Begin -->
+<!-- Internal Component Tracking - End -->
+<a href="/w/food-health-and-happiness-oprah-winfrey/1124768842?ean=9781250126535" onclick="set_cookie('pc_New from Oprah: <i>Food, Health, and Happiness</i>_na_text');"><span class="default-utility">New from Oprah: <i>Food, Health, and Happiness</i></span>&nbsp;<span class="default-utility"></span></a>
+</li>
+<li><font color=""></font>
+<!-- Internal Component Tracking - Begin -->
+<!-- Internal Component Tracking - End -->
+<a href="/h/putmeinthestory" onclick="set_cookie('pc_30% Off Bestselling Personalized Books_na_text');"><span class="default-utility">30% Off Bestselling Personalized Books</span>&nbsp;</a>
+</li>
+</ul>
+<a href="http://www.barnesandnoble.com/membership/"><span class="default-utility">Membership</span></a>
+<a href="http://www.barnesandnoble.com/b/gift-cards/_/N-8rg"><span class="default-utility">Gift Cards</span></a>
+<a href="http://stores.barnesandnoble.com/"><span class="default-utility">Stores & Events</span></a>
+<a href="https://help.barnesandnoble.com/"><span class="default-utility">Help</span></a>
+</aside>
+</nav>
+<div class="PageContent">
+<nav id="primaryNav" role="navigation">
+<ol role="menubar">
+<li id="topNav1" class="nav-item main-cat-1">
+<a href="/b/books/_/N-29Z8q8"  role="menu" aria-haspopup="false">Books</a>
+<div class="triangle-up"></div>
+<div id="subMenu1" class="nav-menu four-col" role="menuitem" aria-hidden="true">
+<div id="topNavHeader1" class="top-nav-header-bg" >
+<a href="/b/books/_/N-29Z8q8">
+Books<span class="right-arrowhead"></span>
+</a>
+<div class="top-nav-close"></div>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Customer Favorites</li>
+<li class="category"><a href="/b/barnes-noble-classics/_/N-rqv">B&N Classics</a></li>
+<li class="category"><a href="/b/books/_/N-1fZ29Z8q8">B&N Top 100</a></li>
+<li class="category"><a href="/b/barnes-noble-stores-bestsellers/_/N-1p2x">B&N Stores' Bestsellers</a></li>
+<li class="category"><a href="/blog/this-weeks-biggest-books/">B&N's Biggest Books</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/b/contributor/_/N-2k20">Books by Author</a></li>
+<li class="category"><a href="/b/books/awards/_/N-29Z8q8Z1d6q">Book Awards</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/b/series/_/N-2k21">Books by Series</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/b/coloring-books-for-everyone/_/N-1ptx">Coloring Books for Everyone</a></li>
+<li class="category"><a href="/b/coming-soon/_/N-1oyfZ8q8">Coming Soon</a></li>
+<li class="category"><a href="/h/coupons-deals">Coupons & Deals</a></li>
+<li class="category"><a href="/b/new-releases/_/N-1oyg">New Releases</a></li>
+<li class="category"><a href="/b/the-new-york-times-bestsellers/_/N-1p3n">NY Times Bestsellers</a></li>
+<li class="category"><a href="/b/paperback/_/N-2cnh">The Paperback Store</a></li>
+<li class="category"><a href="/b/signed-books-at-bncom/_/N-rp2">Signed Books</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Subjects</li>
+<li class="category"><a href="/b/books/biography/_/N-29Z8q8Zsoc">Biography</a></li>
+<li class="category"><a href="/b/books/business/_/N-29Z8q8Zt82">Business</a></li>
+<li class="category"><a href="/b/books/cookbooks-food-wine/_/N-29Z8q8Zy3b">Cookbooks, Food & Wine</a></li>
+<li class="category"><a href="/b/books/diet-health-fitness/_/N-29Z8q8Z11ip">Diet, Health & Fitness</a></li>
+<li class="category"><a href="/b/books/fiction/_/N-29Z8q8Z10h8">Fiction</a></li>
+<li class="category"><a href="/b/books/graphic-novels-comics/_/N-29Z8q8Zucb">Graphic Novels & Comics</a></li>
+<li class="category"><a href="/b/books/history/_/N-29Z8q8Z11km">History</a></li>
+<li class="category"><a href="/b/books/mystery-crime/_/N-29Z8q8Z16g4">Mystery & Crime</a></li>
+<li class="category"><a href="/b/books/religion/_/N-29Z8q8Z17d6">Religion</a></li>
+<li class="category"><a href="/b/books/romance/_/N-29Z8q8Z17y3">Romance</a></li>
+<li class="category"><a href="/b/books/science-fiction-fantasy/_/N-29Z8q8Z180l">Science Fiction & Fantasy</a></li>
+<li class="category"><a href="/b/books/self-help-relationships/_/N-29Z8q8Z18ly">Self-Help & Relationships</a></li>
+<li class="category"><a href="/h/books/browse">See More ></a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Departments</li>
+<li class="category"><a href="/b/audiobook/_/N-2cnc">Audiobooks</a></li>
+<li class="category"><a href="/b/bargain-books/_/N-8qb">Bargain Books</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/readouts/?utm_source=BN%20Readouts&utm_medium=Books%20Flyout&utm_term=Launch&utm_content=Blog%20&utm_campaign=BN%20Readouts%20Blog">B&N Readouts</a></li>
+<li class="category"><a href="/b/calendars/_/N-8rb">Calendars</a></li>
+<li class="category"><a href="/b/large-print/books/_/N-1pu1Z29Z8q8">Large Print</a></li>
+<li class="category"><a href="/b/libros-en-espanol/_/N-1p6a">Libros en español</a></li>
+<li class="category"><a href="https://www.nookpress.com?st=TRF&sid=BNB_DRS_NewNOOKPressPOD_20160614&2sid=BooksFlyoutLink_NA_NA&sourceId=TRBoM00311">Self-Publish with NOOK Press™</a></li>
+<li class="category"><a href="/b/textbooks/_/N-8q9">Textbooks</a></li>
+</ul>
+<ul class="category-list">
+<li class="category">Blogs</li>
+<li class="category"><a href="http://www.barnesandnoble.com/blog/">B&N Reads</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/review/">B&N Review</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/blog/sci-fi-fantasy/">B&N Sci-Fi & Fantasy Blog</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/blog/teen/">B&N Teen Blog</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<aside class="category-sidebar promo-pod">
+<!-- Internal Component Tracking - Begin -->
+<!-- Internal Component Tracking - End -->
+<a href="/b/coming-soon/_/N-1oyfZ8q8" onclick="set_cookie('ppod_TopNav-Coming Soon_Shop Now_imagetext');">
+<div>
+<ul>
+<li>
+<p class="promo-pod-header">Coming Soon</p>
+<img src="//dispatch.barnesandnoble.com/content/dam/ccr/bnstores/books/topnav-promopod-images/2016/PROD-6953_BooksFlyoutUpdate_12-5_03.png" alt="" />
+<p>Pre-Order Tomorrow's Bestsellers Today</p>
+<p>
+<span class="btn">Shop Now</span>
+</p>
+</li>
+</ul>
+</div>
+</a>
+</aside>
+</div>
+</div>
+</li>
+<li id="topNav2" class="nav-item main-cat-2">
+<a href="/b/nook-books/_/N-8qa"  role="menu" aria-haspopup="false">NOOK Books</a>
+<div class="triangle-up"></div>
+<div id="subMenu2" class="nav-menu four-col" role="menuitem" aria-hidden="true">
+<div id="topNavHeader2" class="top-nav-header-bg" >
+<a href="/b/nook-books/_/N-8qa">
+NOOK Books<span class="right-arrowhead"></span>
+</a>
+<div class="top-nav-close"></div>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Customer Favorites</li>
+<li class="category"><a href="http://www.barnesandnoble.com/readouts/?utm_source=BN%20Readouts&utm_medium=NOKBOOKS%20Flyout&utm_term=Launch&utm_content=Blog%20&utm_campaign=BN%20Readouts%20Blog">B&N Readouts</a></li>
+<li class="category"><a href="/b/nook-books/_/N-1fZ8qa">NOOK Top 100</a></li>
+<li class="category"><a href="/b/nook-daily-find/_/N-1p60">NOOK Daily Find</a></li>
+<li class="category"><a href="/b/the-new-york-times-bestsellers-ebooks/_/N-1p2j">NY Times Bestsellers</a></li>
+<li class="category"><a href="/b/nook-books/_/N-wZ1pZ8qa">New Releases</a></li>
+<li class="category"><a href="/b/coming-soon/_/N-1oyfZ8qa">Coming Soon</a></li>
+<li class="category"><a href="/b/nook-books-under-5/_/N-1p5w">NOOK Book Deals</a></li>
+<li class="category"><a href="/b/nook-press/_/N-8r8">NOOK Press™ Books</a></li>
+<li class="category"><a href="https://www.nookpress.com">Self-Publish with NOOK Press™</a></li>
+<li class="category"><a href="https://print.nookpress.com/?st=TRF&sid=BNB_DRS_NewNOOKPressPOD_20160628&2sid=NOOKBooksFlyoutLink_NA_NA&sourceId=TRNOM00310">NEW NOOK Press™ Sell in Print</a></li>
+<li class="category"><a href="/b/foreign-language-nook-books/_/N-1p5a">NOOK Foreign Language</a></li>
+<li class="category"><a href="/b/nook-book-bundles/_/N-rrt">NOOK Book Bundles</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Subjects</li>
+<li class="category"><a href="/b/nook-books/biography/_/N-8qaZsoc">Biography</a></li>
+<li class="category"><a href="/b/nook-books/business/_/N-8qaZt82">Business</a></li>
+<li class="category"><a href="/b/nook-books/politics-current-affairs/_/N-8qaZ16st">Current Affairs & Politics</a></li>
+<li class="category"><a href="/b/nook-books/diet-health-fitness/_/N-8qaZ11ip">Diet, Health & Fitness</a></li>
+<li class="category"><a href="/b/nook-books/fiction/_/N-8qaZ10h8">Fiction</a></li>
+<li class="category"><a href="/b/nook-books/history/_/N-8qaZ11km">History</a></li>
+<li class="category"><a href="/b/nook-books/mystery-crime/_/N-8qaZ16g4">Mystery & Crime</a></li>
+<li class="category"><a href="/b/nook-books/religion/_/N-8qaZ17d6">Religion</a></li>
+<li class="category"><a href="/b/nook-books/romance/_/N-8qaZ17y3">Romance</a></li>
+<li class="category"><a href="/b/nook-books/science-fiction-fantasy/_/N-8qaZ180l">Sci-Fi & Fantasy</a></li>
+<li class="category"><a href="/b/nook-books/self-help-relationships/_/N-8qaZ18ly">Self-Help & Relationships</a></li>
+<li class="category"><a href="/b/nook-books/teens/_/N-8qaZ19r4">Teen Books</a></li>
+<li class="category"><a href="/h/ebooks/subjects">See More ></a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Departments</li>
+<li class="category"><a href="/b/nook-books/graphic-novels-comics/_/N-8qaZucb">NOOK Comics</a></li>
+<li class="category"><a href="/b/nook-books/kids/_/N-8qaZtu1">Kids' Books</a></li>
+<li class="category"><a href="/b/nook-kids-read-to-me-books/_/N-rbh">NOOK Kids Read To Me™</a></li>
+<li class="category"><a href="/b/nook-kids-read-and-play/_/N-rbg">NOOK Kids Read and Play™</a></li>
+<li class="category"><a href="/b/nook-newsstand/newsstand/_/N-8raZ8qe">Newsstand</a></li>
+<li class="category"><a href="https://www.nookaudiobooks.com/">NOOK Audiobooks Store</a></li>
+<li class="category"><a href="/b/nook-catalogs/_/N-8re">NOOK Catalogs</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/h/nook/apps">Free NOOK Mobile Apps</a></li>
+</ul>
+<ul class="category-list">
+<li class="category">NOOK Store</li>
+<li class="category"><a href="http://www.barnesandnoble.com/b/nook/_/N-1pbl">Shop NOOK</a></li>
+<li class="category"><a href="https://nook.barnesandnoble.com/my_library">My NOOK Library</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<aside class="category-sidebar promo-pod">
+<!-- Internal Component Tracking - Begin -->
+<!-- Internal Component Tracking - End -->
+<a href="http://www.barnesandnoble.com/readouts/serial-reads?st=TRF&sid=BNB_DRS_SerialReads_20161201&2sid=NOKBooksFlyout_NA_NA&sourceId=TRNOM00739" onclick="set_cookie('ppod_TopNav-Read for Free, Now on Serial Reads_Start Reading_imagetext');">
+<div>
+<ul>
+<li>
+<p class="promo-pod-header">Read for Free, Now on Serial Reads</p>
+<img src="//dispatch.barnesandnoble.com/content/dam/ccr/bnstores/nookbooks/topnav-promopod-images/2016/SerialReads_12_TestWills_Flyout_img.png" alt="" />
+<p>A war-damaged inspector struggles to solve a shocking murder.</p>
+<p>
+<span class="btn">Start Reading</span>
+</p>
+</li>
+</ul>
+</div>
+</a>
+</aside>
+</div>
+</div>
+</li>
+<li id="topNav3" class="nav-item main-cat-3">
+<a href="http://www.barnesandnoble.com/b/nook/_/N-1pbl"  role="menu" aria-haspopup="false">NOOK</a>
+<div class="triangle-up"></div>
+<div id="subMenu3" class="nav-menu four-col" role="menuitem" aria-hidden="true">
+<div id="topNavHeader3" class="top-nav-header-bg" >
+<a href="http://www.barnesandnoble.com/b/nook/_/N-1pbl">
+NOOK<span class="right-arrowhead"></span>
+</a>
+<div class="top-nav-close"></div>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">NOOK by Samsung Tablets</li>
+<li class="category"><a href="/w/nook-tablet-7-inch-barnes-noble/1124589342?ean=9781400501656">NOOK Tablet</a></li>
+<li class="category"><a href="/w/samsung-galaxy-tab-a-nook-7-inch-barnes-noble/1123826273?ean=9780594762157">Samsung Galaxy Tab A NOOK</a></li>
+<li class="category"><a href="/w/avatar-8-barnes-noble/1122314016?ean=9780594699842">Samsung Galaxy Tab S2 NOOK</a></li>
+<li class="category"><a href="/w/samsung-galaxy-tab-e-nook-9-inch-barnes-noble/1122750330?ean=9781400697601">Samsung Galaxy Tab E NOOK</a></li>
+<li class="category"><a href="/w/samsung-galaxy-tab-4-nook-7-inch-barnes-noble/1119732448?ean=9781400697496">Samsung Galaxy Tab 4 NOOK 7"</a></li>
+<li class="category"><a href="/b/nook-accessories/_/N-1p28">Accessories</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">NOOK eReaders</li>
+<li class="category"><a href="/w/nook-glowlight-plus-barnes-noble/1122314015?ean=9781400697564">NOOK GlowLight Plus</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/b/nook-accessories/_/N-1p28">Accessories</a></li>
+</ul>
+<ul class="category-list">
+<li class="category">NOOK Mobile Apps</li>
+<li class="category"><a href="http://www.barnesandnoble.com/h/nook/apps">See All ></a></li>
+</ul>
+<ul class="category-list">
+<li class="category">Blogs & Forum</li>
+<li class="category"><a href="http://www.barnesandnoble.com/readouts/?utm_source=BN%20Readouts&utm_medium=NOK%20Flyout&utm_term=Launch&utm_content=Blog%20&utm_campaign=BN%20Readouts%20Blog">B&N Readouts</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/nook-blog/">NOOK Blog</a></li>
+<li class="category"><a href="https://bookclubs.barnesandnoble.com/welcome">NOOK Support Forum</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">NOOK Store</li>
+<li class="category"><a href="http://www.barnesandnoble.com/b/nook-accessories/_/N-1p28">Accessories</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/b/nook-catalogs/_/N-8re">Catalogs</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/b/nook-books/_/N-8qa">Books</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/b/nook-newsstand/newsstand/_/N-8raZ8qe">Newsstand</a></li>
+<li class="category"><a href="https://www.nookaudiobooks.com/">NOOK Audiobooks Store</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/b/nook-books/kids/_/N-8qaZtu1">Kids' Books</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/h/nook/compare">Compare Our NOOKs</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/h/coupons-deals">Special Offers</a></li>
+</ul>
+<ul class="category-list">
+<li class="category">Need Help?</li>
+<li class="category"><a href="http://help.barnesandnoble.com/app/nook_support/list">NOOK Support</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<aside class="category-sidebar promo-pod">
+<!-- Internal Component Tracking - Begin -->
+<!-- Internal Component Tracking - End -->
+<a href="/w/nook-tablet-7-inch-barnes-noble/1124589342?ean=9781400501656" onclick="set_cookie('ppod_TopNav-Our New NOOK Tablet® Only $49.99_Shop Now_imagetext');">
+<div>
+<ul>
+<li>
+<p class="promo-pod-header">Our New NOOK Tablet® Only $49.99</p>
+<img src="//dispatch.barnesandnoble.com/content/dam/ccr/bnstores/nook/topnav-promopod-images/2016/NOOKTablet_wLegal_img.png" alt="" />
+<p>Read forever®, for less, with our most affordable tablet ever.</p>
+<p>
+<span class="btn">Shop Now</span>
+</p>
+</li>
+</ul>
+</div>
+</a>
+</aside>
+</div>
+</div>
+</li>
+<li id="topNav4" class="nav-item main-cat-4">
+<a href="/b/textbooks/_/N-8q9"  role="menu" aria-haspopup="false">Textbooks</a>
+<div class="triangle-up"></div>
+<div id="subMenu4" class="nav-menu three-col" role="menuitem" aria-hidden="true">
+<div id="topNavHeader4" class="top-nav-header-bg" >
+<a href="/b/textbooks/_/N-8q9">
+Textbooks<span class="right-arrowhead"></span>
+</a>
+<div class="top-nav-close"></div>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Departments</li>
+<li class="category"><a href="/h/textbooks/used">Used</a></li>
+<li class="category"><a href="/h/textbooks/rental">Rental</a></li>
+<li class="category"><a href="/h/textbooks/new">New</a></li>
+<li class="category"><a href="/textbook/textbook-buyback.jsp">Sell your Textbooks</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Subjects</li>
+<li class="category"><a href="/b/textbooks/business/_/N-8q9Zt82">Business</a></li>
+<li class="category"><a href="/b/textbooks/computers/_/N-8q9Zug4">Computer</a></li>
+<li class="category"><a href="/b/textbooks/education/_/N-8q9Zzmg">Education</a></li>
+<li class="category"><a href="/b/textbooks/history/_/N-8q9Z11km">History</a></li>
+<li class="category"><a href="/b/textbooks/medicine-nursing/medicine/_/N-8q9Z168q">Medicine</a></li>
+<li class="category"><a href="/b/textbooks/philosophy/_/N-8q9Z1fe7">Philosophy</a></li>
+<li class="category"><a href="/b/textbooks/current-affairs-politics/_/N-8q9Z16st">Politics & Current Affairs</a></li>
+<li class="category"><a href="/b/textbooks/psychology/_/N-8q9Z1fcc">Psychology</a></li>
+<li class="category"><a href="/b/textbooks/science-technology/_/N-8q9Z184l">Science</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<aside class="category-sidebar promo-pod">
+<!-- Internal Component Tracking - Begin -->
+<!-- Internal Component Tracking - End -->
+<a href="http://www.barnesandnoble.com/b/textbooks/_/N-8q9" onclick="set_cookie('ppod_TopNav-Up to 90% Off Textbooks_Shop Now_imagetext');">
+<div>
+<ul>
+<li>
+<p class="promo-pod-header">Up to 90% Off Textbooks</p>
+<img src="//dispatch.barnesandnoble.com/content/dam/ccr/bnstores/textbooks/topnav-promopod-images/2016/Textbooks_Flyout.png" alt="" />
+<p>Plus, rent your textbooks from 60-130 days.</p>
+<p>
+<span class="btn">Shop Now</span>
+</p>
+</li>
+</ul>
+</div>
+</a>
+</aside>
+</div>
+</div>
+</li>
+<li id="topNav5" class="nav-item main-cat-5">
+<a href="/b/bargain-books/_/N-8qb"  role="menu" aria-haspopup="false">Bargain</a>
+<div class="triangle-up"></div>
+<div id="subMenu5" class="nav-menu four-col" role="menuitem" aria-hidden="true">
+<div id="topNavHeader5" class="top-nav-header-bg" >
+<a href="/b/bargain-books/_/N-8qb">
+Bargain Books<span class="right-arrowhead"></span>
+</a>
+<div class="top-nav-close"></div>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Customer Favorites</li>
+<li class="category"><a href="/b/activity-kits/_/N-2gsw">Activity Kits</a></li>
+<li class="category"><a href="/b/bargain-books/_/N-1fZ8qb">Bargain Bestsellers</a></li>
+<li class="category"><a href="/b/barnes-noble-classics/_/N-rqv">B&N Classics</a></li>
+<li class="category"><a href="/b/barnes-noble-collectible-editions/_/N-2cnb">B&N Collectible Editions</a></li>
+<li class="category"><a href="/b/bargain-books/_/N-cZ8qb">Books under $5</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Subjects</li>
+<li class="category"><a href="/b/bargain-books/art-architecture-photography/_/N-8qbZs9i">Art, Architecture & Photography</a></li>
+<li class="category"><a href="/b/bargain-books/biography/_/N-8qbZsoc">Biography</a></li>
+<li class="category"><a href="/b/bargain-books/cookbooks-food-wine/_/N-8qbZy3b">Cookbooks, Food & Wine</a></li>
+<li class="category"><a href="/b/bargain-books/diet-health-fitness/_/N-8qbZ11ip">Diet, Health & Fitness</a></li>
+<li class="category"><a href="/b/bargain-books/fiction/_/N-8qbZ10h8">Fiction</a></li>
+<li class="category"><a href="/b/bargain-books/history/_/N-8qbZ11km">History</a></li>
+<li class="category"><a href="/b/bargain-books/mystery-crime/_/N-8qbZ16g4">Mystery & Crime</a></li>
+<li class="category"><a href="/b/bargain-books/religion/_/N-8qbZ17d6">Religion</a></li>
+<li class="category"><a href="/b/bargain-books/romance/_/N-8qbZ17y3">Romance</a></li>
+<li class="category"><a href="/b/bargain-books/science-fiction-fantasy/_/N-8qbZ180l">Science Fiction & Fantasy</a></li>
+<li class="category"><a href="/b/bargain-books/self-help-relationships/_/N-8qbZ18ly">Self-Help & Relationships</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">More Ways to Save</li>
+<li class="category"><a href="/h/coupons-deals">Coupons & Deals</a></li>
+<li class="category"><a href="/b/nook-daily-find/_/N-1p60">NOOK Daily Find</a></li>
+<li class="category"><a href="/membership/">Membership</a></li>
+</ul>
+<ul class="category-list">
+<li class="category">More Bargains</li>
+<li class="category"><a href="/b/promotions/home-gift/electronics/_/N-rrkZ8qgZ1hj0">Electronics</a></li>
+<li class="category"><a href="/b/promotions/home-gift/_/N-rrkZ8qg">Home & Gifts</a></li>
+<li class="category"><a href="/b/movies-tv/_/N-3Z8qh">Movies & TV</a></li>
+<li class="category"><a href="/b/music/_/N-3Z8qi">Music</a></li>
+<li class="category"><a href="/b/toys-games/_/N-cZ8qf">Toys & Games</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<aside class="category-sidebar promo-pod">
+<!-- Internal Component Tracking - Begin -->
+<!-- Internal Component Tracking - End -->
+<a href="http://www.barnesandnoble.com/b/barnes-noble-collectible-editions/_/N-2cnb" onclick="set_cookie('ppod_TopNav-B&N Collectible Editions_Shop Now_imagetext');">
+<div>
+<ul>
+<li>
+<p class="promo-pod-header">B&N Collectible Editions</p>
+<img src="//dispatch.barnesandnoble.com/content/dam/ccr/bnstores/bargain/topnav-promopod-images/2016/PROD-7100_BargainUpdate_Flyout_image.png" alt="" />
+<p>Beautifully designed editions at everyday low prices.</p>
+<p>
+<span class="btn">Shop Now</span>
+</p>
+</li>
+</ul>
+</div>
+</a>
+</aside>
+</div>
+</div>
+</li>
+<li id="topNav6" class="nav-item main-cat-6">
+<a href="/b/nook-newsstand/newsstand/_/N-8raZ8qe"  role="menu" aria-haspopup="false">Newsstand</a>
+<div class="triangle-up"></div>
+<div id="subMenu6" class="nav-menu four-col" role="menuitem" aria-hidden="true">
+<div id="topNavHeader6" class="top-nav-header-bg" >
+<a href="/b/nook-newsstand/newsstand/_/N-8raZ8qe">
+Newsstand<span class="right-arrowhead"></span>
+</a>
+<div class="top-nav-close"></div>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">NOOK Newsstand</li>
+<li class="category"><a href="/b/nook-newsstand/newsstand/magazines/_/N-8raZ8qeZ1gzq">NOOK Magazines</a></li>
+<li class="category"><a href="/b/nook-newsstand/newsstand/newspapers/_/N-8raZ8qeZ1gzr">NOOK Newspapers</a></li>
+<li class="category"><a href="/b/nook-newsstand/newsstand/_/N-wZ8raZ8qe">All NOOK Periodicals</a></li>
+<li class="category"><a href="/b/nook-newsstand/newsstand/_/N-1fZ8raZ8qe">Top Free Trials</a></li>
+<li class="category"><a href="/b/nook-magazine-special-issues/_/N-8qeZ8raZ1p3y">Special Issues</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Print Newsstand</li>
+<li class="category"><a href="/b/newsstand/magazines/_/N-8qeZ1gzq">Over 900 Print Subscriptions</a></li>
+<li class="category"><a href="/b/newsstand/_/N-1fZ1z0zhwcZ8qe">Bestselling Subscriptions</a></li>
+<li class="category"><a href="/b/newsstand/_/N-1fZ3Z1z0zhwcZ8qe">Subscriptions Under $10</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">NOOK Favorites</li>
+<li class="category"><a href="/b/nook-newsstand/newsstand/magazines/womens-interest-magazines/_/N-1fZ8raZ8qeZ1hht">Women's Magazines</a></li>
+<li class="category"><a href="/b/nook-newsstand/newsstand/magazines/mens-interest-magazines/_/N-1fZ8raZ8qeZ1hhk">Men's Magazines</a></li>
+<li class="category"><a href="/b/nook-newsstand/newsstand/magazines/business-finance-magazines/_/N-1fZ8raZ8qeZ1hh5">Business Publications</a></li>
+</ul>
+<ul class="category-list">
+<li class="category">Print Favorites</li>
+<li class="category"><a href="/b/newsstand/magazines/womens-interest-magazines/_/N-1fZ8qeZ1hht">Women's Magazines</a></li>
+<li class="category"><a href="/b/newsstand/magazines/mens-interest-magazines/_/N-1fZ8qeZ1hhk">Men's Magazines</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<aside class="category-sidebar promo-pod">
+<!-- Internal Component Tracking - Begin -->
+<!-- Internal Component Tracking - End -->
+<a href="/b/holiday-back-issue-offer/_/N-2l5z" onclick="set_cookie('ppod_TopNav-Treat Yourself This Holiday Season_Shop Now_imagetext');">
+<div>
+<ul>
+<li>
+<p class="promo-pod-header">Treat Yourself This Holiday Season</p>
+<img src="//dispatch.barnesandnoble.com/content/dam/ccr/bnstores/newsstand/topnav-promopod-images/2016/PROD-6983_DigitalNewstandHolidayBack_Flyout_image.png" alt="" />
+<p>Subscribe to select magazines & get up to 12 back issues free. Ends 1/2.</p>
+<p>
+<span class="btn">Shop Now</span>
+</p>
+</li>
+</ul>
+</div>
+</a>
+</aside>
+</div>
+</div>
+</li>
+<li id="topNav7" class="nav-item main-cat-7">
+<a href="/b/books/teens/_/N-29Z8q8Z19r4"  role="menu" aria-haspopup="false">Teens</a>
+<div class="triangle-up"></div>
+<div id="subMenu7" class="nav-menu three-col" role="menuitem" aria-hidden="true">
+<div id="topNavHeader7" class="top-nav-header-bg" >
+<a href="/b/books/teens/_/N-29Z8q8Z19r4">
+Teens' Books<span class="right-arrowhead"></span>
+</a>
+<div class="top-nav-close"></div>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Customer Favorites</li>
+<li class="category"><a href="/b/books/teens/_/N-1fZ29Z8q8Z19r4">Bestsellers</a></li>
+<li class="category"><a href="/b/adaptive-studios/_/N-2joy">Adaptive Studios</a></li>
+<li class="category"><a href="/b/books/teens/_/N-1rZ29Z8q8Z19r4">New Releases</a></li>
+<li class="category"><a href="/b/coming-soon/books/teens/_/N-1oyfZ8q8Z19r4">Coming Soon</a></li>
+<li class="category"><a href="/b/nook-books/teens/_/N-8qaZ19r4">NOOK Books</a></li>
+</ul>
+<ul class="category-list">
+<li class="category">Bestselling Series</li>
+<li class="category"><a href="/b/divergent/_/N-1p7a">Divergent Series</a></li>
+<li class="category"><a href="/b/the-hunger-games/_/N-1p7i">The Hunger Games</a></li>
+<li class="category"><a href="/b/series/maze-runner-series/_/N-2kpt">The Maze Runner Series</a></li>
+<li class="category"><a href="/b/harry-potter/_/N-1p38">Harry Potter</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Popular Authors</li>
+<li class="category"><a href="/b/contributor/cassandra-clare/_/N-2k5i">Cassandra Clare</a></li>
+<li class="category"><a href="/b/contributor/victoria-aveyard/_/N-2kob">Victoria Aveyard</a></li>
+<li class="category"><a href="/b/contributor/sarah-dessen/_/N-2klp">Sarah Dessen</a></li>
+<li class="category"><a href="/b/john-green/_/N-1p5h">John Green</a></li>
+<li class="category"><a href="/b/contributor/sarah-j-maas/_/N-2klq">Sarah J. Maas</a></li>
+<li class="category"><a href="/b/contributor/rainbow-rowell/_/N-2kjk">Rainbow Rowell</a></li>
+<li class="category"><a href="/b/contributor/ransom-riggs/_/N-2kjo">Ransom Riggs</a></li>
+</ul>
+<ul class="category-list">
+<li class="category">Blog</li>
+<li class="category"><a href="http://www.barnesandnoble.com/blog/teen/">The B&N Teen Blog</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<aside class="category-sidebar promo-pod">
+<!-- Internal Component Tracking - Begin -->
+<!-- Internal Component Tracking - End -->
+<a href="/b/coming-soon/books/teens/_/N-1oyfZ8q8Z19r4" onclick="set_cookie('ppod_TopNav-Coming Soon_Read More_imagetext');">
+<div>
+<ul>
+<li>
+<p class="promo-pod-header">Coming Soon</p>
+<img src="//dispatch.barnesandnoble.com/content/dam/ccr/bnstores/teens/topnav-promopod-images/2016/PROD-6735_TeenFlyoutUpdate_11-22_03.png" alt="" />
+<p>Pre-order tomorrow's bestselling books for teens today.</p>
+<p>
+<span class="btn">Read More</span>
+</p>
+</li>
+</ul>
+</div>
+</a>
+</aside>
+</div>
+</div>
+</li>
+<li id="topNav8" class="nav-item main-cat-8">
+<a href="/b/books/kids/_/N-29Z8q8Ztu1"  role="menu" aria-haspopup="false">Kids</a>
+<div class="triangle-up"></div>
+<div id="subMenu8" class="nav-menu four-col" role="menuitem" aria-hidden="true">
+<div id="topNavHeader8" class="top-nav-header-bg" >
+<a href="/b/books/kids/_/N-29Z8q8Ztu1">
+Kids' Books<span class="right-arrowhead"></span>
+</a>
+<div class="top-nav-close"></div>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Customer Favorites</li>
+<li class="category"><a href="/b/books/kids/_/N-1fZ29Z8q8Ztu1?Ns=P_Sales_Rank">Bestsellers</a></li>
+<li class="category"><a href="/b/coming-soon/books/kids/_/N-1oyfZ8q8Ztu1">Coming Soon</a></li>
+<li class="category"><a href="/b/books/kids/_/N-1rZ29Z8q8Ztu1">New Releases</a></li>
+<li class="category"><a href="/b/nook-books/kids/_/N-8qaZtu1">eBooks Kids</a></li>
+<li class="category"><a href="/b/books/books/awards/kids-book-awards/_/N-29Z8q8Z1s20">Kids' Book Awards</a></li>
+<li class="category"><a href="/b/picture-books/_/N-2eg0">Picture Books</a></li>
+</ul>
+<ul class="category-list">
+<li class="category">Age Groups</li>
+<li class="category"><a href="/b/books/kids/_/N-7Z29Z8q8Ztu1">0 - 2 Years</a></li>
+<li class="category"><a href="/b/books/kids/_/N-8Z29Z8q8Ztu1">3 - 5 Years</a></li>
+<li class="category"><a href="/b/books/kids/_/N-9Z29Z8q8Ztu1">6 - 8 Years</a></li>
+<li class="category"><a href="/b/books/kids/_/N-aZ29Z8q8Ztu1">9 - 12 Years</a></li>
+<li class="category"><a href="/b/books/teens/_/N-29Z8q8Z19r4">Teens</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Top Collections</li>
+<li class="category"><a href="/b/american-girl/_/N-1p0h">American Girl</a></li>
+<li class="category"><a href="/b/diary-of-a-wimpy-kid/_/N-1pcc">Diary of a Wimpy Kid</a></li>
+<li class="category"><a href="/b/finding-dory/_/N-2ir9">Finding Dory</a></li>
+<li class="category"><a href="/b/harry-potter/_/N-1p38">Harry Potter</a></li>
+<li class="category"><a href="/s/%22Land%20of%20Stories%20Series%22?Ntk=P_Series_Title&Ns=P_Series_Number&Ntx=mode+matchall">Land of Stories</a></li>
+<li class="category"><a href="/b/magic-tree-house/_/N-1p0j">Magic Tree House</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/b/warriors-by-erin-hunter/_/N-2jt8">Warriors by Erin Hunter</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/b/peppa-pig/_/N-2h06">Peppa Pig</a></li>
+</ul>
+<ul class="category-list">
+<li class="category">Popular Authors</li>
+<li class="category"><a href="/b/dr-seuss/_/N-1p35">Dr. Seuss</a></li>
+<li class="category"><a href="/b/rick-riordan/_/N-2j2v">Rick Riordan</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/b/contributor/rachel-rene-russell/_/N-2kji">Rachel Renee Russell</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">More For Kids</li>
+<li class="category"><a href="/h/bn-educators/">B&N Educators</a></li>
+<li class="category"><a href="/account/kidsclub/">B&N Kids' Club</a></li>
+<li class="category"><a href="/b/movies-tv/children/_/N-8qhZ1eq5">Kids' DVD</a></li>
+<li class="category"><a href="/b/music/children/_/N-8qiZ1dfk">Kids' Music</a></li>
+<li class="category"><a href="/b/toys-games/_/N-8qf">Toys & Games</a></li>
+</ul>
+<ul class="category-list">
+<li class="category">Blog</li>
+<li class="category"><a href="http://www.barnesandnoble.com/blog/kids/">B&N Kids Blog</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<aside class="category-sidebar promo-pod">
+<!-- Internal Component Tracking - Begin -->
+<!-- Internal Component Tracking - End -->
+<a href="http://www.barnesandnoble.com/b/books/kids/_/N-29Z8q8Ztu1" onclick="set_cookie('ppod_TopNav-Coming Soon for Kids_See Details_imagetext');">
+<div>
+<ul>
+<li>
+<p class="promo-pod-header">Coming Soon for Kids</p>
+<img src="//dispatch.barnesandnoble.com/content/dam/ccr/bnstores/kids/topnav-promopod-images/2016/PROD-6736_KidsUpdate_Flyout_Image.png" alt="" />
+<p>Pre-order tomorrow’s bestselling kids’ books today.</p>
+<p>
+<span class="btn">See Details</span>
+</p>
+</li>
+</ul>
+</div>
+</a>
+</aside>
+</div>
+</div>
+</li>
+<li id="topNav9" class="nav-item main-cat-9">
+<a href="/b/toys-games/_/N-8qf"  role="menu" aria-haspopup="false">Toys<span>&</span>Games</a>
+<div class="triangle-up"></div>
+<div id="subMenu9" class="nav-menu four-col" role="menuitem" aria-hidden="true">
+<div id="topNavHeader9" class="top-nav-header-bg" >
+<a href="/b/toys-games/_/N-8qf">
+Toys & Games<span class="right-arrowhead"></span>
+</a>
+<div class="top-nav-close"></div>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Popular Categories</li>
+<li class="category"><a href="/b/toys-games/arts-crafts/_/N-8qfZ1hkj">Arts & Crafts</a></li>
+<li class="category"><a href="/b/toys-games/_/N-1fZ8qf">Bestsellers</a></li>
+<li class="category"><a href="/b/toys-games/building-lego/_/N-8qfZ1hmc">Building & LEGO</a></li>
+<li class="category"><a href="/b/toys-games/baby-toddler-toys/_/N-8qfZ1hkv">Baby & Toddler Toys</a></li>
+<li class="category"><a href="/b/toys-games/dolls-stuffed-animals/_/N-8qfZ1hmi">Dolls & Stuffed Animals</a></li>
+<li class="category"><a href="/b/toys-games/puzzles/_/N-8qfZ1hox">Puzzles</a></li>
+<li class="category"><a href="/b/toys-games/science-center/_/N-8qfZ1hph">Science Center</a></li>
+<li class="category"><a href="/b/toys-games/_/N-8qf">See More ></a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Brands & Characters</li>
+<li class="category"><a href="/b/toys-games/brands/espari/_/N-8qfZ2c7m">espari™ Dolls</a></li>
+<li class="category"><a href="/b/toys-games/brands/leapfrog/_/N-8qfZ2c84">LeapFrog</a></li>
+<li class="category"><a href="/b/lego/_/N-1p5j">LEGO</a></li>
+<li class="category"><a href="/b/toys-games/brands/melissa-doug/_/N-8qfZ2c97">Melissa & Doug</a></li>
+<li class="category"><a href="/b/toys-games/characters/minecraft/_/N-8qfZ2chm">Minecraft</a></li>
+</ul>
+<ul class="category-list">
+<li class="category">Deals</li>
+<li class="category"><a href="/b/hot-deals-toys-games/_/N-1p5e">All Toys & Games Deals</a></li>
+<li class="category"><a href="/b/hot-deals-toys-games/_/N-1p5e">Up to 30% Off Select Toys</a></li>
+<li class="category"><a href="/b/barnsie-special-offer/_/N-1gvf">Barnsie Only $9.95 With Purchase</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Age Groups</li>
+<li class="category"><a href="/b/toys-games/_/N-7Z8qf">0 - 2 Years</a></li>
+<li class="category"><a href="/b/toys-games/_/N-8Z8qf">3 - 5 Years</a></li>
+<li class="category"><a href="/b/toys-games/_/N-9Z8qf">6 - 8 Years</a></li>
+<li class="category"><a href="/b/toys-games/_/N-aZ8qf">9 - 12 Years</a></li>
+<li class="category"><a href="/b/toys-games/_/N-bZ8qf">Teens</a></li>
+</ul>
+<ul class="category-list">
+<li class="category">Price</li>
+<li class="category"><a href="/b/toys-games/_/N-4Z8qf">$25 & Under</a></li>
+<li class="category"><a href="/b/toys-games/_/N-5Z8qf">$25 - $50</a></li>
+<li class="category"><a href="/b/toys-games/_/N-6Z8qf">$50 - $100</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<aside class="category-sidebar promo-pod">
+<!-- Internal Component Tracking - Begin -->
+<!-- Internal Component Tracking - End -->
+<a href="/b/hot-deals-toys-games/_/N-1p5e" onclick="set_cookie('ppod_TopNav-30% Off Select Toys_Shop Now_imagetext');">
+<div>
+<ul>
+<li>
+<p class="promo-pod-header">30% Off Select Toys</p>
+<img src="//dispatch.barnesandnoble.com/content/dam/ccr/topnav/toys-games/2016/PROD-7003_Toys_flyout.png" alt="" />
+<p>For a limited time save 30% on select toys.</p>
+<p>
+<span class="btn">Shop Now</span>
+</p>
+</li>
+</ul>
+</div>
+</a>
+</aside>
+</div>
+</div>
+</li>
+<li id="topNav10" class="nav-item main-cat-10">
+<a href="/b/hobbies-collectibles/_/N-1gls"  role="menu" aria-haspopup="false">Hobbies<span>&</span>Collectibles</a>
+<div class="triangle-up"></div>
+<div id="subMenu10" class="nav-menu three-col" role="menuitem" aria-hidden="true">
+<div id="topNavHeader10" class="top-nav-header-bg" >
+<a href="/b/hobbies-collectibles/_/N-1gls">
+Hobbies & Collectibles<span class="right-arrowhead"></span>
+</a>
+<div class="top-nav-close"></div>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Categories</li>
+<li class="category"><a href="/b/hobbies-collectibles/_/N-1fZ1gls">Bestsellers</a></li>
+<li class="category"><a href="/b/hobbies-collectibles/collectibles/_/N-1glsZ1hie">Collectibles</a></li>
+<li class="category"><a href="/b/hobbies-collectibles/crafting/_/N-1glsZ1hif">Crafting</a></li>
+<li class="category"><a href="/b/hobbies-collectibles/family-classic-games/_/N-1glsZ1hn9">Family & Classic Games</a></li>
+<li class="category"><a href="/b/hobbies-collectibles/hobbies/_/N-1glsZ1hig">Hobbies</a></li>
+<li class="category"><a href="/b/hobbies-collectibles/mind-memory-logic-games/_/N-1glsZ1hih">Mind, Memory, & Logic</a></li>
+<li class="category"><a href="/b/hobbies-collectibles/puzzles/_/N-1glsZ1hox">Puzzles</a></li>
+<li class="category"><a href="/b/hobbies-collectibles/strategy-games/_/N-1glsZ1hil">Strategy Games</a></li>
+<li class="category"><a href="/b/hobbies-collectibles/trend/_/N-1glsZ1hpr">Trend</a></li>
+</ul>
+<ul class="category-list">
+<li class="category">Deals</li>
+<li class="category"><a href="/b/hot-deals-in-hobbies-collectibles/_/N-2l29">All Hobbies & Collectibles Deals</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/w/toys-games-xyzprinting-da-vinci-jr-10-wifi-3d-printer/29341244">$100 Off 3D Printer</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Special Collections</li>
+<li class="category"><a href="/b/hobbies-collectibles/characters/doctor-who/_/N-1glsZ2c9p">Doctor Who</a></li>
+<li class="category"><a href="/b/hobbies-collectibles/special-collections/dc-comics/_/N-1glsZ1qmy">DC Comics</a></li>
+<li class="category"><a href="/b/hobbies-collectibles/special-collections/lego-architecture/_/N-1glsZ1qn2">Lego Architecture</a></li>
+<li class="category"><a href="/b/hobbies-collectibles/special-collections/marvel-comics/_/N-1glsZ1qn3">Marvel Comics</a></li>
+<li class="category"><a href="/b/hobbies-collectibles/special-collections/walking-dead/_/N-1glsZ1qn5">Walking Dead</a></li>
+</ul>
+<ul class="category-list">
+<li class="category">Shop By Price</li>
+<li class="category"><a href="/b/hobbies-collectibles/_/N-3Z1gls">Under $10</a></li>
+<li class="category"><a href="/b/hobbies-collectibles/_/N-4Z1gls">$10 - $25</a></li>
+<li class="category"><a href="/b/hobbies-collectibles/_/N-5Z1gls">$25 - $50</a></li>
+<li class="category"><a href="/b/hobbies-collectibles/_/N-6Z1gls">Over $50</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<aside class="category-sidebar promo-pod">
+<!-- Internal Component Tracking - Begin -->
+<!-- Internal Component Tracking - End -->
+<a href="/b/new-everyday-low-prices-on-family-games/_/N-2l78" onclick="set_cookie('ppod_TopNav-Save on Family Favorites_Shop Now_imagetext');">
+<div>
+<ul>
+<li>
+<p class="promo-pod-header">Save on Family Favorites</p>
+<img src="//dispatch.barnesandnoble.com/content/dam/ccr/bnstores/hobbies/topnav-promopod-images/2016/PROD-7255_H&GFamilyGames_Flyout_image.png" alt="" />
+<p>Enjoy new everyday low prices on family games.</p>
+<p>
+<span class="btn">Shop Now</span>
+</p>
+</li>
+</ul>
+</div>
+</a>
+</aside>
+</div>
+</div>
+</li>
+<li id="topNav11" class="nav-item main-cat-11">
+<a href="/b/home-gifts/_/N-8qg"  role="menu" aria-haspopup="false">Home<span>&</span>Gifts</a>
+<div class="triangle-up"></div>
+<div id="subMenu11" class="nav-menu four-col" role="menuitem" aria-hidden="true">
+<div id="topNavHeader11" class="top-nav-header-bg" >
+<a href="/b/home-gifts/_/N-8qg">
+Home & Gifts<span class="right-arrowhead"></span>
+</a>
+<div class="top-nav-close"></div>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Popular Categories</li>
+<li class="category"><a href="/b/home-gifts/art-supplies/_/N-8qgZ1h02">Art Supplies</a></li>
+<li class="category"><a href="/b/home-gifts/bags-totes/_/N-8qgZ1h04">Bags & Totes</a></li>
+<li class="category"><a href="/b/home-gifts/decorative-accents/_/N-8qgZ1h05">Decorative Accents</a></li>
+<li class="category"><a href="/b/home-gifts/electronics/_/N-8qgZ1hj0">Electronics</a></li>
+<li class="category"><a href="/b/home-gifts/journals/_/N-8qgZ1hg8">Journals</a></li>
+<li class="category"><a href="/b/home-gifts/reading-aids/_/N-8qgZ1hgh">Reading Aids</a></li>
+<li class="category"><a href="/b/home-gift/_/N-8qg">See All ></a></li>
+</ul>
+<ul class="category-list">
+<li class="category">Price</li>
+<li class="category"><a href="/b/home-gifts/_/N-3Z8qg">Under $10</a></li>
+<li class="category"><a href="/b/home-gifts/_/N-4Z8qg">$10 - $25</a></li>
+<li class="category"><a href="/b/home-gifts/_/N-5Z8qg">$25 - $50</a></li>
+<li class="category"><a href="/b/home-gifts/_/N-6Z8qg">$50 and Up</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Gift Finder</li>
+<li class="category"><a href="/b/home-gifts/gift-giving/_/N-8qgZ1hfi">Gifts for Everyone</a></li>
+<li class="category"><a href="/b/home-gifts/gift-giving/for-her/_/N-8qgZ1hfs">For Her</a></li>
+<li class="category"><a href="/b/home-gifts/gift-giving/for-him/_/N-8qgZ1hft">For Him</a></li>
+<li class="category"><a href="/b/home-gifts/gift-giving/gifts-for-students/_/N-8qgZ1hfx">For Students</a></li>
+<li class="category"><a href="/b/home-gift/gift-giving/reader/_/N-8qgZ1hfv">For Readers</a></li>
+<li class="category"><a href="/b/home-gift/gift-giving/gifts-for-writers/_/N-8qgZ1hg2">For Writers</a></li>
+</ul>
+<ul class="category-list">
+<li class="category">Favorite Brands</li>
+<li class="category"><a href="/b/home-gifts/brands/moleskine/_/N-8qgZ2cpi">Moleskine</a></li>
+<li class="category"><a href="/b/home-gifts/brands/vera-bradley/_/N-8qgZ2cr9">Vera Bradley</a></li>
+<li class="category"><a href="/b/home-gifts/brands/knock-knock/_/N-8qgZ2cqb">Knock Knock</a></li>
+<li class="category"><a href="/b/kate-spade-new-york/_/N-1qnz">Kate Spade New York</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/b/bando-collection/_/N-2eeb">Ban.do Collection</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Seasonal Favorites</li>
+<li class="category"><a href="http://www.barnesandnoble.com/b/this-seasons-top-gifts/_/N-2gfu">This Season's Top Gifts</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/b/flameless-candles-buy-1-get-1-at-50-off/_/N-1gyr">Flameless Candles - Buy 1, Get 1 at 50% Off</a></li>
+<li class="category"><a href="/b/holiday-tote-1295-with-purchase/_/N-1ptp">Holiday Tote Only $12.95</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/b/holiday-boxed-cards/_/N-2g6y">30% Off Boxed Cards</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/b/wellness-gifts-for-the-mind/_/N-2kyf">Wellness Gifts for the Mind</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/b/snowy-days-nights-collection/_/N-2kxk">Snowy Days & Nights Collection</a></li>
+<li class="category"><a href="/b/holiday-ornaments-995/_/N-2kvs">Collectible Holiday Ornaments</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/b/stocking-stuffers/_/N-2kxm">Stocking Stuffers</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/b/gifts-for-the-host-hostess/_/N-2l06">Gifts for the Host & Hostess</a></li>
+</ul>
+<ul class="category-list">
+<li class="category">Special Collections</li>
+<li class="category"><a href="/b/harry-potter/_/N-1p38">Harry Potter</a></li>
+<li class="category"><a href="/b/fantastic-beasts-gifts-for-harry-potter-fans/_/N-2kxc">Fantastic Beasts</a></li>
+<li class="category"><a href="/s/moana/_/N-8qg">Moana</a></li>
+<li class="category"><a href="/b/finding-dory/_/N-2ir9">Finding Dory</a></li>
+<li class="category"><a href="/b/star-wars/_/N-1p49">Star Wars</a></li>
+<li class="category"><a href="/b/pusheen-the-cat/_/N-2kxh">Pusheen the Cat</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<aside class="category-sidebar promo-pod">
+<!-- Internal Component Tracking - Begin -->
+<!-- Internal Component Tracking - End -->
+<a href="/b/holiday-tote-1295-with-purchase/_/N-1ptp" onclick="set_cookie('ppod_TopNav-Exclusive Holiday Tote Only $12.95!_Shop Now_imagetext');">
+<div>
+<ul>
+<li>
+<p class="promo-pod-header">Exclusive Holiday Tote Only $12.95!</p>
+<img src="//dispatch.barnesandnoble.com/content/dam/ccr/topnav/home-gift/2016/PROD-6349-it1.png" alt="" />
+<p>Available in four styles with any purchase while supplies last.</p>
+<p>
+<span class="btn">Shop Now</span>
+</p>
+</li>
+</ul>
+</div>
+</a>
+</aside>
+</div>
+</div>
+</li>
+<li id="topNav12" class="nav-item main-cat-12">
+<a href="/b/movies-tv/_/N-8qh"  role="menu" aria-haspopup="false">Movies<span>&</span>TV</a>
+<div class="triangle-up"></div>
+<div id="subMenu12" class="nav-menu four-col" role="menuitem" aria-hidden="true">
+<div id="topNavHeader12" class="top-nav-header-bg" >
+<a href="/b/movies-tv/_/N-8qh">
+Movies & TV<span class="right-arrowhead"></span>
+</a>
+<div class="top-nav-close"></div>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Customer Favorites</li>
+<li class="category"><a href="/b/movies-tv/_/N-1fZ8qh">Bestsellers</a></li>
+<li class="category"><a href="/b/movies-tv/_/N-1vZ8qh">New Releases</a></li>
+<li class="category"><a href="/b/coming-soon/movies-tv/_/N-1oyfZ8qh">Coming Soon</a></li>
+<li class="category"><a href="/b/movies-tv/_/N-1z141rdZ8qh">Blu-ray</a></li>
+<li class="category"><a href="/b/dvd-blu-ray-box-sets/_/N-1pv6">Box Sets</a></li>
+<li class="category"><a href="/b/2016-oscar-nominees/_/N-2h1d">2016 OSCAR® Nominees</a></li>
+</ul>
+<ul class="category-list">
+<li class="category">Deals</li>
+<li class="category"><a href="/b/movies-tv-deals/_/N-2fv2">All Movies & TV Deals</a></li>
+<li class="category"><a href="/b/bn-selects/_/N-1p4l">30% Off B&N Selects</a></li>
+<li class="category"><a href="/b/up-to-50-off-box-sets/_/N-2l16">Up to 50% Off Box Sets</a></li>
+<li class="category"><a href="/b/40-off-british-tv/_/N-2l0j">50% Off British TV</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Categories</li>
+<li class="category"><a href="/b/movies-tv/television/_/N-8qhZ1f2j">TV on DVD</a></li>
+<li class="category"><a href="/b/movies-tv/television/television-british/_/N-8qhZ1f2p">British Television</a></li>
+<li class="category"><a href="/b/movies-tv/classics/_/N-8qhZ1eqv">Classics</a></li>
+<li class="category"><a href="/b/movies-tv/documentary/_/N-8qhZ1et1">Documentaries</a></li>
+<li class="category"><a href="/b/movies-tv/drama/_/N-8qhZ1etw">Drama</a></li>
+<li class="category"><a href="/b/movies-tv/fitness-instructional/_/N-8qhZ1evs">Fitness</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/b/holiday-movies-music/_/N-2l10">Holiday Movies & TV</a></li>
+<li class="category"><a href="/b/movies-tv/children/_/N-8qhZ1eq5">Kids</a></li>
+</ul>
+<ul class="category-list">
+<li class="category">Related Categories</li>
+<li class="category"><a href="/b/home-gift/electronics/_/N-8qgZ1hj0">Electronics</a></li>
+<li class="category"><a href="/b/music/_/N-8qi">Music</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Special Collections</li>
+<li class="category"><a href="/b/movies-tv/_/N-8qhZ1z09bvx">Arrow Video</a></li>
+<li class="category"><a href="/b/criterion-collection/_/N-1p0i">Criterion Collection</a></li>
+<li class="category"><a href="/b/disney-movies/_/N-1p34">Disney</a></li>
+<li class="category"><a href="/b/doctor-who/_/N-1gnp">Doctor Who</a></li>
+<li class="category"><a href="/b/game-of-thrones-collection/_/N-rc5">Game of Thrones</a></li>
+<li class="category"><a href="/b/harry-potter-special-edition-movies/_/N-2k0b">Harry Potter</a></li>
+<li class="category"><a href="/b/the-outlander-collection/_/N-1gzt">Outlander</a></li>
+<li class="category"><a href="/b/star-wars/_/N-1p49">Star Wars</a></li>
+<li class="category"><a href="/b/star-trek/_/N-1pci">Star Trek</a></li>
+<li class="category"><a href="/b/teenage-mutant-ninja-turtles/_/N-2iss">Teenage Mutant Ninja Turtles</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<aside class="category-sidebar promo-pod">
+<!-- Internal Component Tracking - Begin -->
+<!-- Internal Component Tracking - End -->
+<a href="/b/40-off-british-tv/_/N-2l0j" onclick="set_cookie('ppod_TopNav-50% Off British TV_Shop Now_imagetext');">
+<div>
+<ul>
+<li>
+<p class="promo-pod-header">50% Off British TV</p>
+<img src="//dispatch.barnesandnoble.com/content/dam/ccr/bnstores/moviesandtv/topnav-promopod-images/2016/PROD-6775_Movies&TVBritishSale_Flyout_image.png" alt="" />
+<p>Save on a brilliant selection of favorite British TV shows.</p>
+<p>
+<span class="btn">Shop Now</span>
+</p>
+</li>
+</ul>
+</div>
+</a>
+</aside>
+</div>
+</div>
+</li>
+<li id="topNav13" class="nav-item main-cat-13">
+<a href="/b/music/_/N-8qi"  role="menu" aria-haspopup="false">Music</a>
+<div class="triangle-up"></div>
+<div id="subMenu13" class="nav-menu four-col" role="menuitem" aria-hidden="true">
+<div id="topNavHeader13" class="top-nav-header-bg" >
+<a href="/b/music/_/N-8qi">
+The Music Store<span class="right-arrowhead"></span>
+</a>
+<div class="top-nav-close"></div>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Customer Favorites</li>
+<li class="category"><a href="/b/music/_/N-1fZ8qi">Bestsellers</a></li>
+<li class="category"><a href="/b/music/new-this-month/_/N-1qZ8qi">New Releases</a></li>
+<li class="category"><a href="/b/coming-soon/music/_/N-1oyfZ8qi">Coming Soon</a></li>
+<li class="category"><a href="/b/vinyl-albums/_/N-1p2a">The Vinyl Store</a></li>
+<li class="category"><a href="/b/bn-exclusive-vinyl/_/N-1ptw">Vinyl Exclusives</a></li>
+<li class="category"><a href="/b/discover-great-new-music/_/N-rpo">Discover Great New Music</a></li>
+</ul>
+<ul class="category-list">
+<li class="category">Deals</li>
+<li class="category"><a href="/b/50-off-teac-turntable-speakers-bundle/_/N-2kvn">TEAC Turntable & Speakers Offer</a></li>
+<li class="category"><a href="/b/499-cd-sale/_/N-rqd">$4.99 CD Sale</a></li>
+<li class="category"><a href="/b/699-cd-sale/_/N-rb7">$6.99 CD Sale</a></li>
+<li class="category"><a href="/b/999-cd-sale/_/N-1gn7">$9.99 CD Sale</a></li>
+<li class="category"><a href="/b/music-deals/_/N-rjs">Music Deals</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Genres</li>
+<li class="category"><a href="/b/music/blues-folk/_/N-8qiZ1d9q">Blues & Folk Music</a></li>
+<li class="category"><a href="/b/music/broadway-vocal/_/N-8qiZ1df7">Broadway & Vocal</a></li>
+<li class="category"><a href="/b/music/children/_/N-8qiZ1dfk">Children's Music</a></li>
+<li class="category"><a href="/b/music/classical/_/N-8qiZ1dhi">Classical</a></li>
+<li class="category"><a href="/b/music/country/_/N-8qiZ1dg2">Country Music</a></li>
+<li class="category"><a href="http://www.barnesandnoble.com/b/music/miscellaneous/holiday-music/_/N-8qiZ1drn">Holiday Music</a></li>
+<li class="category"><a href="/b/music/jazz/_/N-8qiZ1dl5">Jazz</a></li>
+<li class="category"><a href="/b/music/pop/_/N-8qiZ1du0">Pop Music</a></li>
+<li class="category"><a href="/b/music/rock/_/N-8qiZ1e2j">Rock</a></li>
+<li class="category"><a href="/b/music/soundtracks/_/N-8qiZ1e6t">Soundtracks</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<ul class="category-list">
+<li class="category">Special Collections</li>
+<li class="category"><a href="/s/%22The%20Beatles%22/_/N-8qi/?Ns=P_Sales_Rank&Ntk=P_key_Contributor_List&Ntx=mode+matchall">The Beatles</a></li>
+<li class="category"><a href="/b/tony-bennett/_/N-1p6w">Tony Bennett</a></li>
+<li class="category"><a href="/b/bob-dylan/_/N-2kyj">Bob Dylan</a></li>
+<li class="category"><a href="/b/featured-artist-lady-gaga/music/_/N-2l1tZ8qi">Lady Gaga</a></li>
+<li class="category"><a href="/b/sarah-mclachlan/_/N-2ks8">Sarah McLachlan</a></li>
+<li class="category"><a href="/b/featured-artist-bruce-springsteen/_/N-2jtz">Bruce Springsteen</a></li>
+<li class="category"><a href="/b/featured-artist-sting/_/N-2jpc">Sting</a></li>
+</ul>
+<ul class="category-list">
+<li class="category">Related Categories</li>
+<li class="category"><a href="/b/audiobook/_/N-2cnc">Audiobooks</a></li>
+<li class="category"><a href="/b/home-gift/electronics/_/N-8qgZ1hj0">Electronics</a></li>
+<li class="category"><a href="/b/home-gifts/audio-video/turntables/_/N-8qgZ1hjk">Turntables</a></li>
+</ul>
+</div>
+<div class="list-wrapper">
+<aside class="category-sidebar promo-pod">
+<!-- Internal Component Tracking - Begin -->
+<!-- Internal Component Tracking - End -->
+<a href="http://www.barnesandnoble.com/b/the-vinyl-store/_/N-1p2a" onclick="set_cookie('ppod_TopNav-The Vinyl Store_Shop Now_imagetext');">
+<div>
+<ul>
+<li>
+<p class="promo-pod-header">The Vinyl Store</p>
+<img src="//dispatch.barnesandnoble.com/content/dam/ccr/bnstores/music/topnav-promopod-images/2016/Music_flyout.png" alt="" />
+<p>LPs, Turntables, and More</p>
+<p>
+<span class="btn">Shop Now</span>
+</p>
+</li>
+</ul>
+</div>
+</a>
+</aside>
+</div>
+</div>
+</li>
+</ol>
+</nav>
+</div>
+</header>
+<div id="screen"></div>
+<main role="main" class="clearer">
+<div class="browser-notice ie-outdated">
+<div>
+<span class="x">&#215;</span>
+<p>
+<b>Uh-oh, it looks like your Internet Explorer is out of date.</b>
+<br><br>
+For a better shopping experience, please <a target="_blank" href="http://windows.microsoft.com/en-us/internet-explorer/download-ie/">upgrade now.</a>
+</p>
+</div>
+</div>
+<script>
+if($.browser.msie && parseInt($.browser.version, 10) <=10){
+if(!$('.ie-outdated').is('visible')){
+$('.ie-outdated').show();
+}
+}
+</script>
+<noscript>
+<div class="browser-notice">
+<div>
+<p class="circle">&#33;</p>
+<p>&nbsp;&nbsp;Javascript is not enabled in your browser. Enabling JavaScript in your browser will allow you to experience all the features of our site.
+</br></br>
+&nbsp;&nbsp;<a href="https://help.barnesandnoble.com">Learn how to enable JavaScript on your browser</a>
+</p>
+</div>
+</div>
+</noscript>
+<div class="PageContent">
+<section id="main-content" class="landing-page-content">
+<div class="header">
+<section id="categoryHeaderContainer">
+<h1 class="header-with-brackets">
+	<span class="centered-line"></span> <span class="text-container"> <span class="left-bracket"></span> <span class="text">Barnes & Noble Classics</span> <span class="right-bracket"></span> </span></h1></section>
+</div>
+<nav id="refinements" class="secondary-nav-c">
+<h3>You are looking at</h3>
+<ul class="selected-facets">
+<li>
+<a title="Barnes & Noble Classics" rel="nofollow" href="/;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Barnes & Noble Classics</a></li>
+</ul>
+<h2 class="augHeader">Browse B&N Classics</h2>
+<ul>
+<li>
+<div>
+<a href="/b/barnes-noble-classics/_/N-rqv"  onclick="set_cookie('agn_Browse B&N Classics_B&N Classics_text');">B&N Classics</a>
+</div>
+</li>
+<li>
+<div>
+<a href="/h/bnclassics/about"  onclick="set_cookie('agn_Browse B&N Classics_About B&N Classics_text');">About B&N Classics</a>
+</div>
+</li>
+</ul>
+<h2 class="augHeader">For Educators</h2>
+<ul>
+<li>
+<div>
+<a href="/h/bnclassics/academic-resources"  onclick="set_cookie('agn_For Educators_Academic Resources_text');">Academic Resources</a>
+</div>
+</li>
+<li>
+<div>
+<a href="/h/bnclassics/introduction-writers"  onclick="set_cookie('agn_For Educators_Introduction Writers_text');">Introduction Writers</a>
+</div>
+</li>
+</ul>
+<h3 class="left-nav-header">Refine by</h3>
+<div class="refinement">
+<div class="refinements">
+<h2 class="augHeader checkbox-container refinement-header" aria-expanded="true" role="button" tabindex="0">Subjects</h2>
+<ul>
+<li>
+<a class="" rel="" href="/b/barnes-noble-classics/awards/_/N-rqvZ1d6q;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Awards</a></li>
+<li>
+<a class="" rel="" href="/b/barnes-noble-classics/bibles-christianity/_/N-rqvZsj2;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Bibles & Christianity</a></li>
+<li>
+<a class="" rel="" href="/b/barnes-noble-classics/biography/_/N-rqvZsoc;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Biography</a></li>
+<li>
+<a class="" rel="" href="/b/barnes-noble-classics/current-affairs-politics/_/N-rqvZ16st;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Current Affairs & Politics</a></li>
+<li>
+<a class="" rel="" href="/b/barnes-noble-classics/fiction/_/N-rqvZ10h8;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Fiction</a></li>
+<li>
+<a class="" rel="" href="/b/barnes-noble-classics/history/_/N-rqvZ11km;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">History</a></li>
+<li>
+<a class="" rel="" href="/b/barnes-noble-classics/kids/_/N-rqvZtu1;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Kids</a></li>
+<li>
+<a class="" rel="" href="/b/barnes-noble-classics/literature/_/N-rqvZ15v3;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Literature</a></li>
+<li>
+<a class="" rel="" href="/b/barnes-noble-classics/philosophy/_/N-rqvZ1fe7;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Philosophy</a></li>
+<li>
+<a class="" rel="" href="/b/barnes-noble-classics/poetry/_/N-rqvZ1pqh;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Poetry</a></li>
+<li>
+<a class="" rel="" href="/b/barnes-noble-classics/religion/_/N-rqvZ17d6;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Religion</a></li>
+<li>
+<a class="" rel="" href="/b/barnes-noble-classics/romance/_/N-rqvZ17y3;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Romance</a></li>
+<li>
+<a class="" rel="" href="/b/barnes-noble-classics/science-fiction-fantasy/_/N-rqvZ180l;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Science Fiction & Fantasy</a></li>
+<li>
+<a class="" rel="" href="/b/barnes-noble-classics/social-sciences/_/N-rqvZ18q3;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Social Sciences</a></li>
+<li>
+<a class="" rel="" href="/b/barnes-noble-classics/teens/_/N-rqvZ19r4;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Teens</a></li>
+<li class="viewMoreviewLessToggle">
+<a class="" rel="" href="/b/barnes-noble-classics/_/N-rqv;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?showMoreIds=10008">Show More</a></li>
+</ul>
+</div>
+</div>
+<div class="refinement">
+<div class="refinements">
+<h2 class="augHeader checkbox-container refinement-header" aria-expanded="true" role="button" tabindex="1">Prices</h2>
+<ul>
+<li>
+<a class="" rel="nofollow" href="/b/barnes-noble-classics/_/N-rqvZc;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Under $5</a></li>
+<li>
+<a class="" rel="nofollow" href="/b/barnes-noble-classics/_/N-rqvZ3;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">$5 - $10</a></li>
+<li>
+<a class="" rel="nofollow" href="/b/barnes-noble-classics/_/N-rqvZ4;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">$10 - $25</a></li>
+<li>
+<a class="" rel="nofollow" href="/b/barnes-noble-classics/_/N-rqvZ6;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Over $50</a></li>
+</ul>
+</div>
+</div>
+<div class="refinement">
+<div class="refinements">
+<h2 class="augHeader checkbox-container refinement-header" aria-expanded="false" role="button" tabindex="2">Formats</h2>
+<ul>
+<li>
+<a class="" rel="nofollow" href="/b/barnes-noble-classics/_/N-rqvZ1z141yc;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Paperback</a></li>
+<li>
+<a class="" rel="nofollow" href="/b/barnes-noble-classics/_/N-rqvZ1z14193;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">NOOK Book</a></li>
+<li>
+<a class="" rel="nofollow" href="/b/barnes-noble-classics/_/N-rqvZ1z141y4;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Hardcover</a></li>
+</ul>
+</div>
+</div>
+<aside id="relatedAd">
+<figcaption>Advertising</figcaption>
+<script type="text/javascript">
+
+$(document).on('googleRelatedAdsEnabled', function() {
+
+$(document).on('rendered-slot1', function() {
+if($('#relatedAd iframe').length > 0) {
+$('#relatedAd iframe').attr('title', 'Advertising');
+}
+});
+googletag.cmd.push(function() {
+googletag.display("relatedAd");
+});
+
+});
+</script>
+</aside></nav>
+<section id="searchGrid" class="primary-content clearer">
+<section id="summerReading" class="clearer ">
+<div id="summerReadingPromo">
+<h4>Handsome.<BR>Authoritative.<BR>Affordable.</h4>
+<p class="p1">
+	<span class="s1">Find the books that have changed history, inspired Hollywood, and entertained readers for centuries</span>.</p>
+<p class="p2">
+	<span class="s1"><a href="/h/bnclassics/about">Learn More About B&amp;N Classics</a></span></p></div>
+<div id="summerReadingBooks">
+<ul id="book-carousel-summer-reading" data-visible-items="3" data-wrapper-id="summerReadingBooks">
+<li>
+<div class="product-image">
+<a href="/w/wuthering-heights-emily-bront/1116668148?ean=9781593081287" class="carousel-image-link" onclick="set_cookie('productEditorial__Wuthering-Heights/Emily-Bront_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593081287_p0_v4_s457x700.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view" data-quickview-url="/w/wuthering-heights-emily-bront/1116668148?ean=9781593081287" data-work-id="1116668148">Quick View</a>
+<dl>
+<dt>
+<a aria-describedby="" class=" " onclick="set_cookie('productEditorial__Wuthering-Heights/Emily-Bront_text');" href="/w/wuthering-heights-emily-bront/1116668148;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593081287">Wuthering Heights (Barnes &&hellip;</a></dt>
+
+by <dd class="summerReadingContributor"><span class="contributors"><a href="/s/%22Emily Brontë%22;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?Ntk=P_key_Contributor_List&Ns=P_Sales_Rank&Ntx=mode+matchall">Emily Brontë</a></span></dd>
+<dd>
+<div id="gigya-rating-9781593081287" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593081287" class="hide-content" tabindex="0">Average rating: 4.0</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="4.0" alt="4.0">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</dd>
+</dl>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/a-tale-of-two-cities-barnes-noble-classics-series-charles-dickens/1106017525?ean=9781593081386" class="carousel-image-link" onclick="set_cookie('productEditorial__A-Tale-of-Two-Cities-Barnes-Noble-Classics-Series/Charles-Dickens_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593081386_p0_v3_s447x700.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view" data-quickview-url="/w/a-tale-of-two-cities-barnes-noble-classics-series-charles-dickens/1106017525?ean=9781593081386" data-work-id="1106017525">Quick View</a>
+<dl>
+<dt>
+<a aria-describedby="" class=" " onclick="set_cookie('productEditorial__A-Tale-of-Two-Cities-Barnes-Noble-Classics-Series/Charles-Dickens_text');" href="/w/a-tale-of-two-cities-barnes-noble-classics-series-charles-dickens/1106017525;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593081386">A Tale of Two Cities (Barnes &&hellip;</a></dt>
+
+by <dd class="summerReadingContributor"><span class="contributors"><a href="/b/contributor/charles-dickens/_/N-2k2b;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Charles Dickens</a></span></dd>
+<dd>
+<div id="gigya-rating-9781593081386" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593081386" class="hide-content" tabindex="0">Average rating: 4.1</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="4.1" alt="4.1">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</dd>
+</dl>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/frankenstein-mary-shelley/1116608310?ean=9781593081157" class="carousel-image-link" onclick="set_cookie('productEditorial__Frankenstein/Mary-Shelley_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593081157_p0_v5_s394x598.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view" data-quickview-url="/w/frankenstein-mary-shelley/1116608310?ean=9781593081157" data-work-id="1116608310">Quick View</a>
+<dl>
+<dt>
+<a aria-describedby="" class=" " onclick="set_cookie('productEditorial__Frankenstein/Mary-Shelley_text');" href="/w/frankenstein-mary-shelley/1116608310;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593081157">Frankenstein (Barnes & Noble&hellip;</a></dt>
+
+by <dd class="summerReadingContributor"><span class="contributors"><a href="/s/%22Mary Shelley%22;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?Ntk=P_key_Contributor_List&Ns=P_Sales_Rank&Ntx=mode+matchall">Mary Shelley</a></span></dd>
+<dd>
+<div id="gigya-rating-9781593081157" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593081157" class="hide-content" tabindex="0">Average rating: 4.0</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="4.0" alt="4.0">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</dd>
+</dl>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/the-scarlet-letter-nathaniel-hawthorne/1116620656?ean=9781593082079" class="carousel-image-link" onclick="set_cookie('productEditorial__The-Scarlet-Letter/Nathaniel-Hawthorne_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593082079_p0_v4_s452x700.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view" data-quickview-url="/w/the-scarlet-letter-nathaniel-hawthorne/1116620656?ean=9781593082079" data-work-id="1116620656">Quick View</a>
+<dl>
+<dt>
+<a aria-describedby="" class=" " onclick="set_cookie('productEditorial__The-Scarlet-Letter/Nathaniel-Hawthorne_text');" href="/w/the-scarlet-letter-nathaniel-hawthorne/1116620656;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593082079">The Scarlet Letter (Barnes &&hellip;</a></dt>
+
+by <dd class="summerReadingContributor"><span class="contributors"><a href="/b/contributor/nathaniel-hawthorne/_/N-2ki5;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Nathaniel Hawthorne</a></span></dd>
+<dd>
+<div id="gigya-rating-9781593082079" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593082079" class="hide-content" tabindex="0">Average rating: 3.9</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="3.9" alt="3.9">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-half"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</dd>
+</dl>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/pride-and-prejudice-jane-austen/1116668146?ean=9781593082017" class="carousel-image-link" onclick="set_cookie('productEditorial__Pride-and-Prejudice/Jane-Austen_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593082017_p0_v4_s454x700.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view" data-quickview-url="/w/pride-and-prejudice-jane-austen/1116668146?ean=9781593082017" data-work-id="1116668146">Quick View</a>
+<dl>
+<dt>
+<a aria-describedby="" class=" " onclick="set_cookie('productEditorial__Pride-and-Prejudice/Jane-Austen_text');" href="/w/pride-and-prejudice-jane-austen/1116668146;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593082017">Pride and Prejudice (Barnes &&hellip;</a></dt>
+
+by <dd class="summerReadingContributor"><span class="contributors"><a href="/b/contributor/jane-austen/_/N-2kbk;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Jane Austen</a></span></dd>
+<dd>
+<div id="gigya-rating-9781593082017" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593082017" class="hide-content" tabindex="0">Average rating: 3.6</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="3.6" alt="3.6">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-half"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</dd>
+</dl>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/adventures-of-huckleberry-finn-barnes-noble-classics-series-mark-twain/1106017531?ean=9781593081126" class="carousel-image-link" onclick="set_cookie('productEditorial__Adventures-of-Huckleberry-Finn-Barnes-Noble-Classics-Series/Mark-Twain_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593081126_p0_v1_s386x600.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view" data-quickview-url="/w/adventures-of-huckleberry-finn-barnes-noble-classics-series-mark-twain/1106017531?ean=9781593081126" data-work-id="1106017531">Quick View</a>
+<dl>
+<dt>
+<a aria-describedby="" class=" " onclick="set_cookie('productEditorial__Adventures-of-Huckleberry-Finn-Barnes-Noble-Classics-Series/Mark-Twain_text');" href="/w/adventures-of-huckleberry-finn-barnes-noble-classics-series-mark-twain/1106017531;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593081126">Adventures of Huckleberry Finn&hellip;</a></dt>
+
+by <dd class="summerReadingContributor"><span class="contributors"><a href="/b/contributor/mark-twain/_/N-2kgx;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Mark Twain</a></span></dd>
+<dd>
+<div id="gigya-rating-9781593081126" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593081126" class="hide-content" tabindex="0">Average rating: 3.8</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="3.8" alt="3.8">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-half"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</dd>
+</dl>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/strange-case-of-dr-jekyll-and-mr-hyde-and-other-stories-robert-louis-stevenson/1005907293?ean=9781593081317" class="carousel-image-link" onclick="set_cookie('productEditorial__Strange-Case-of-Dr-Jekyll-and-Mr-Hyde-and-Other-Stories/Robert-Louis-Stevenson_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593081317_p0_v3_s454x700.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view" data-quickview-url="/w/strange-case-of-dr-jekyll-and-mr-hyde-and-other-stories-robert-louis-stevenson/1005907293?ean=9781593081317" data-work-id="1005907293">Quick View</a>
+<dl>
+<dt>
+<a aria-describedby="" class=" " onclick="set_cookie('productEditorial__Strange-Case-of-Dr-Jekyll-and-Mr-Hyde-and-Other-Stories/Robert-Louis-Stevenson_text');" href="/w/strange-case-of-dr-jekyll-and-mr-hyde-and-other-stories-robert-louis-stevenson/1005907293;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593081317">The Strange Case of Dr. Jekyll&hellip;</a></dt>
+
+by <dd class="summerReadingContributor"><span class="contributors"><a href="/b/contributor/robert-louis-stevenson/_/N-2kkt;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Robert Louis Stevenson</a></span></dd>
+<dd>
+<div id="gigya-rating-9781593081317" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593081317" class="hide-content" tabindex="0">Average rating: 3.8</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="3.8" alt="3.8">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-half"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</dd>
+</dl>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/count-of-monte-cristo-alexandre-dumas/1100068698?ean=9781593081515" class="carousel-image-link" onclick="set_cookie('productEditorial__Count-of-Monte-Cristo/Alexandre-Dumas_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593081515_p0_v1_s389x600.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view" data-quickview-url="/w/count-of-monte-cristo-alexandre-dumas/1100068698?ean=9781593081515" data-work-id="1100068698">Quick View</a>
+<dl>
+<dt>
+<a aria-describedby="" class=" " onclick="set_cookie('productEditorial__Count-of-Monte-Cristo/Alexandre-Dumas_text');" href="/w/count-of-monte-cristo-alexandre-dumas/1100068698;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593081515">The Count of Monte Cristo&hellip;</a></dt>
+
+by <dd class="summerReadingContributor"><span class="contributors"><a href="/b/contributor/alexandre-dumas/_/N-2k3d;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Alexandre Dumas</a></span></dd>
+<dd>
+<div id="gigya-rating-9781593081515" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593081515" class="hide-content" tabindex="0">Average rating: 4.2</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="4.2" alt="4.2">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</dd>
+</dl>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/little-women-louisa-may-alcott/1116668150?ean=9781593081089" class="carousel-image-link" onclick="set_cookie('productEditorial__Little-Women/Louisa-May-Alcott_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593081089_p0_v4_s456x700.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view" data-quickview-url="/w/little-women-louisa-may-alcott/1116668150?ean=9781593081089" data-work-id="1116668150">Quick View</a>
+<dl>
+<dt>
+<a aria-describedby="" class=" " onclick="set_cookie('productEditorial__Little-Women/Louisa-May-Alcott_text');" href="/w/little-women-louisa-may-alcott/1116668150;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593081089">Little Women (Barnes & Noble&hellip;</a></dt>
+
+by <dd class="summerReadingContributor"><span class="contributors"><a href="/b/contributor/louisa-may-alcott/_/N-2kg7;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Louisa May Alcott</a></span></dd>
+<dd>
+<div id="gigya-rating-9781593081089" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593081089" class="hide-content" tabindex="0">Average rating: 3.4</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="3.4" alt="3.4">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</dd>
+</dl>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/the-picture-of-dorian-gray-oscar-wilde/1116668152?ean=9781593080259" class="carousel-image-link" onclick="set_cookie('productEditorial__The-Picture-of-Dorian-Gray/Oscar-Wilde_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593080259_p0_v4_s446x700.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view" data-quickview-url="/w/the-picture-of-dorian-gray-oscar-wilde/1116668152?ean=9781593080259" data-work-id="1116668152">Quick View</a>
+<dl>
+<dt>
+<a aria-describedby="" class=" " onclick="set_cookie('productEditorial__The-Picture-of-Dorian-Gray/Oscar-Wilde_text');" href="/w/the-picture-of-dorian-gray-oscar-wilde/1116668152;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593080259">The Picture of Dorian Gray&hellip;</a></dt>
+
+by <dd class="summerReadingContributor"><span class="contributors"><a href="/b/contributor/oscar-wilde/_/N-2kin;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Oscar Wilde</a></span></dd>
+<dd>
+<div id="gigya-rating-9781593080259" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593080259" class="hide-content" tabindex="0">Average rating: 4.1</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="4.1" alt="4.1">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</dd>
+</dl>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/jane-eyre-charlotte-bronte/1116670758?ean=9781593081171" class="carousel-image-link" onclick="set_cookie('productEditorial__Jane-Eyre/Charlotte-Bronte_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593081171_p0_v3_s452x700.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view" data-quickview-url="/w/jane-eyre-charlotte-bronte/1116670758?ean=9781593081171" data-work-id="1116670758">Quick View</a>
+<dl>
+<dt>
+<a aria-describedby="" class=" " onclick="set_cookie('productEditorial__Jane-Eyre/Charlotte-Bronte_text');" href="/w/jane-eyre-charlotte-bronte/1116670758;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593081171">Jane Eyre (Barnes & Noble&hellip;</a></dt>
+
+by <dd class="summerReadingContributor"><span class="contributors"><a href="/s/%22Charlotte Bronte%22;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?Ntk=P_key_Contributor_List&Ns=P_Sales_Rank&Ntx=mode+matchall">Charlotte Bronte</a></span></dd>
+<dd>
+<div id="gigya-rating-9781593081171" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593081171" class="hide-content" tabindex="0">Average rating: 4.4</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="4.4" alt="4.4">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</dd>
+</dl>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/narrative-of-the-life-of-frederick-douglass-an-american-slave-frederick-douglass/1116670483?ean=9781593080419" class="carousel-image-link" onclick="set_cookie('productEditorial__Narrative-of-the-Life-of-Frederick-Douglass-an-American-Slave/Frederick-Douglass_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593080419_p0_v4_s455x700.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view" data-quickview-url="/w/narrative-of-the-life-of-frederick-douglass-an-american-slave-frederick-douglass/1116670483?ean=9781593080419" data-work-id="1116670483">Quick View</a>
+<dl>
+<dt>
+<a aria-describedby="" class=" " onclick="set_cookie('productEditorial__Narrative-of-the-Life-of-Frederick-Douglass-an-American-Slave/Frederick-Douglass_text');" href="/w/narrative-of-the-life-of-frederick-douglass-an-american-slave-frederick-douglass/1116670483;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593080419">Narrative of the Life of&hellip;</a></dt>
+
+by <dd class="summerReadingContributor"><span class="contributors"><a href="/s/%22Frederick Douglass%22;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?Ntk=P_key_Contributor_List&Ns=P_Sales_Rank&Ntx=mode+matchall">Frederick Douglass</a></span></dd>
+<dd>
+<div id="gigya-rating-9781593080419" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593080419" class="hide-content" tabindex="0">Average rating: 3.9</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="3.9" alt="3.9">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-half"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</dd>
+</dl>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/secret-garden-frances-hodgson-burnett/1100156315?ean=9781593082772" class="carousel-image-link" onclick="set_cookie('productEditorial__Secret-Garden/Frances-Hodgson-Burnett_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593082772_p0_v4_s454x700.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view" data-quickview-url="/w/secret-garden-frances-hodgson-burnett/1100156315?ean=9781593082772" data-work-id="1100156315">Quick View</a>
+<dl>
+<dt>
+<a aria-describedby="" class=" " onclick="set_cookie('productEditorial__Secret-Garden/Frances-Hodgson-Burnett_text');" href="/w/secret-garden-frances-hodgson-burnett/1100156315;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593082772">The Secret Garden (Barnes &&hellip;</a></dt>
+
+by <dd class="summerReadingContributor"><span class="contributors"><a href="/s/%22Frances Hodgson Burnett%22;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?Ntk=P_key_Contributor_List&Ns=P_Sales_Rank&Ntx=mode+matchall">Frances Hodgson Burnett</a></span></dd>
+<dd>
+<div id="gigya-rating-9781593082772" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593082772" class="hide-content" tabindex="0">Average rating: 4.1</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="4.1" alt="4.1">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</dd>
+</dl>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/great-expectations-charles-dickens/1116627604?ean=9781593081164" class="carousel-image-link" onclick="set_cookie('productEditorial__Great-Expectations/Charles-Dickens_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593081164_p0_v3_s450x700.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view" data-quickview-url="/w/great-expectations-charles-dickens/1116627604?ean=9781593081164" data-work-id="1116627604">Quick View</a>
+<dl>
+<dt>
+<a aria-describedby="" class=" " onclick="set_cookie('productEditorial__Great-Expectations/Charles-Dickens_text');" href="/w/great-expectations-charles-dickens/1116627604;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593081164">Great Expectations (Barnes &&hellip;</a></dt>
+
+by <dd class="summerReadingContributor"><span class="contributors"><a href="/b/contributor/charles-dickens/_/N-2k2b;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Charles Dickens</a></span></dd>
+<dd>
+<div id="gigya-rating-9781593081164" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593081164" class="hide-content" tabindex="0">Average rating: 3.9</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="3.9" alt="3.9">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-half"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</dd>
+</dl>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/crime-and-punishment-fyodor-dostoevsky/1116756319?ean=9781593080815" class="carousel-image-link" onclick="set_cookie('productEditorial__Crime-and-Punishment/Fyodor-Dostoevsky_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593080815_p0_v1_s390x600.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view" data-quickview-url="/w/crime-and-punishment-fyodor-dostoevsky/1116756319?ean=9781593080815" data-work-id="1116756319">Quick View</a>
+<dl>
+<dt>
+<a aria-describedby="" class=" " onclick="set_cookie('productEditorial__Crime-and-Punishment/Fyodor-Dostoevsky_text');" href="/w/crime-and-punishment-fyodor-dostoevsky/1116756319;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593080815">Crime and Punishment (Barnes &&hellip;</a></dt>
+
+by <dd class="summerReadingContributor"><span class="contributors"><a href="/s/%22Fyodor Dostoevsky%22;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?Ntk=P_key_Contributor_List&Ns=P_Sales_Rank&Ntx=mode+matchall">Fyodor Dostoevsky</a></span></dd>
+<dd>
+<div id="gigya-rating-9781593080815" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593080815" class="hide-content" tabindex="0">Average rating: 4.2</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="4.2" alt="4.2">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</dd>
+</dl>
+</div>
+</li>
+</ul>
+</div>
+</section>
+<!-- Internal Component Tracking - Begin -->
+<!-- Internal Component Tracking - End -->
+<section id="gridViewSpotlight" class="clearer ">
+<h2>B&N Classics Bestsellers</h2>
+<div class="btn see-all">
+<a onclick="set_cookie('gridView_B&amp;N Classics Bestsellers_See All__link');" href="/b/barnes-noble-classics/books/_/N-rqvZ8q8;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?Ns=P_Sales_Rank"><span>See All</span></a></div>
+<ul id="gridView">
+<li>
+<ul>
+<li>
+<div class="product-image">
+<a href="/w/wuthering-heights-emily-bront/1116668148?ean=9781593081287" class="carousel-image-link" onclick="set_cookie('gridView_B&N Classics Bestsellers_Wuthering-Heights/Emily-Bront_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593081287_p0_v4_s457x700.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view gft-crd-view" data-quickview-url="/w/wuthering-heights-emily-bront/1116668148?ean=9781593081287" data-work-id="1116668148">Quick View</a>
+</div>
+<div>
+<a aria-describedby="" class=" " onclick="set_cookie('gridView_B&N Classics Bestsellers_Wuthering-Heights/Emily-Bront_text');" href="/w/wuthering-heights-emily-bront/1116668148;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593081287">Wuthering Heights (Barnes &&hellip;</a></div>
+
+by <a href="/s/%22Emily Brontë%22;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?Ntk=P_key_Contributor_List&Ns=P_Sales_Rank&Ntx=mode+matchall">Emily Brontë</a><div id="gigya-rating-9781593081287" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593081287" class="hide-content" tabindex="0">Average rating: 4.0</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="4.0" alt="4.0">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/a-tale-of-two-cities-barnes-noble-classics-series-charles-dickens/1106017525?ean=9781593081386" class="carousel-image-link" onclick="set_cookie('gridView_B&N Classics Bestsellers_A-Tale-of-Two-Cities-Barnes-Noble-Classics-Series/Charles-Dickens_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593081386_p0_v3_s447x700.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view gft-crd-view" data-quickview-url="/w/a-tale-of-two-cities-barnes-noble-classics-series-charles-dickens/1106017525?ean=9781593081386" data-work-id="1106017525">Quick View</a>
+</div>
+<div>
+<a aria-describedby="" class=" " onclick="set_cookie('gridView_B&N Classics Bestsellers_A-Tale-of-Two-Cities-Barnes-Noble-Classics-Series/Charles-Dickens_text');" href="/w/a-tale-of-two-cities-barnes-noble-classics-series-charles-dickens/1106017525;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593081386">A Tale of Two Cities (Barnes &&hellip;</a></div>
+
+by <a href="/b/contributor/charles-dickens/_/N-2k2b;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Charles Dickens</a><div id="gigya-rating-9781593081386" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593081386" class="hide-content" tabindex="0">Average rating: 4.1</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="4.1" alt="4.1">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/frankenstein-mary-shelley/1116608310?ean=9781593081157" class="carousel-image-link" onclick="set_cookie('gridView_B&N Classics Bestsellers_Frankenstein/Mary-Shelley_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593081157_p0_v5_s394x598.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view gft-crd-view" data-quickview-url="/w/frankenstein-mary-shelley/1116608310?ean=9781593081157" data-work-id="1116608310">Quick View</a>
+</div>
+<div>
+<a aria-describedby="" class=" " onclick="set_cookie('gridView_B&N Classics Bestsellers_Frankenstein/Mary-Shelley_text');" href="/w/frankenstein-mary-shelley/1116608310;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593081157">Frankenstein (Barnes & Noble&hellip;</a></div>
+
+by <a href="/s/%22Mary Shelley%22;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?Ntk=P_key_Contributor_List&Ns=P_Sales_Rank&Ntx=mode+matchall">Mary Shelley</a><div id="gigya-rating-9781593081157" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593081157" class="hide-content" tabindex="0">Average rating: 4.0</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="4.0" alt="4.0">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/the-scarlet-letter-nathaniel-hawthorne/1116620656?ean=9781593082079" class="carousel-image-link" onclick="set_cookie('gridView_B&N Classics Bestsellers_The-Scarlet-Letter/Nathaniel-Hawthorne_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593082079_p0_v4_s452x700.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view gft-crd-view" data-quickview-url="/w/the-scarlet-letter-nathaniel-hawthorne/1116620656?ean=9781593082079" data-work-id="1116620656">Quick View</a>
+</div>
+<div>
+<a aria-describedby="" class=" " onclick="set_cookie('gridView_B&N Classics Bestsellers_The-Scarlet-Letter/Nathaniel-Hawthorne_text');" href="/w/the-scarlet-letter-nathaniel-hawthorne/1116620656;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593082079">The Scarlet Letter (Barnes &&hellip;</a></div>
+
+by <a href="/b/contributor/nathaniel-hawthorne/_/N-2ki5;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Nathaniel Hawthorne</a><div id="gigya-rating-9781593082079" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593082079" class="hide-content" tabindex="0">Average rating: 3.9</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="3.9" alt="3.9">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-half"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/pride-and-prejudice-jane-austen/1116668146?ean=9781593082017" class="carousel-image-link" onclick="set_cookie('gridView_B&N Classics Bestsellers_Pride-and-Prejudice/Jane-Austen_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593082017_p0_v4_s454x700.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view gft-crd-view" data-quickview-url="/w/pride-and-prejudice-jane-austen/1116668146?ean=9781593082017" data-work-id="1116668146">Quick View</a>
+</div>
+<div>
+<a aria-describedby="" class=" " onclick="set_cookie('gridView_B&N Classics Bestsellers_Pride-and-Prejudice/Jane-Austen_text');" href="/w/pride-and-prejudice-jane-austen/1116668146;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593082017">Pride and Prejudice (Barnes &&hellip;</a></div>
+
+by <a href="/b/contributor/jane-austen/_/N-2kbk;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Jane Austen</a><div id="gigya-rating-9781593082017" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593082017" class="hide-content" tabindex="0">Average rating: 3.6</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="3.6" alt="3.6">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-half"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</li>
+</ul>
+<ul>
+<li>
+<div class="product-image">
+<a href="/w/adventures-of-huckleberry-finn-barnes-noble-classics-series-mark-twain/1106017531?ean=9781593081126" class="carousel-image-link" onclick="set_cookie('gridView_B&N Classics Bestsellers_Adventures-of-Huckleberry-Finn-Barnes-Noble-Classics-Series/Mark-Twain_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593081126_p0_v1_s386x600.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view gft-crd-view" data-quickview-url="/w/adventures-of-huckleberry-finn-barnes-noble-classics-series-mark-twain/1106017531?ean=9781593081126" data-work-id="1106017531">Quick View</a>
+</div>
+<div>
+<a aria-describedby="" class=" " onclick="set_cookie('gridView_B&N Classics Bestsellers_Adventures-of-Huckleberry-Finn-Barnes-Noble-Classics-Series/Mark-Twain_text');" href="/w/adventures-of-huckleberry-finn-barnes-noble-classics-series-mark-twain/1106017531;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593081126">Adventures of Huckleberry Finn&hellip;</a></div>
+
+by <a href="/b/contributor/mark-twain/_/N-2kgx;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Mark Twain</a><div id="gigya-rating-9781593081126" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593081126" class="hide-content" tabindex="0">Average rating: 3.8</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="3.8" alt="3.8">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-half"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/strange-case-of-dr-jekyll-and-mr-hyde-and-other-stories-robert-louis-stevenson/1005907293?ean=9781593081317" class="carousel-image-link" onclick="set_cookie('gridView_B&N Classics Bestsellers_Strange-Case-of-Dr-Jekyll-and-Mr-Hyde-and-Other-Stories/Robert-Louis-Stevenson_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593081317_p0_v3_s454x700.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view gft-crd-view" data-quickview-url="/w/strange-case-of-dr-jekyll-and-mr-hyde-and-other-stories-robert-louis-stevenson/1005907293?ean=9781593081317" data-work-id="1005907293">Quick View</a>
+</div>
+<div>
+<a aria-describedby="" class=" " onclick="set_cookie('gridView_B&N Classics Bestsellers_Strange-Case-of-Dr-Jekyll-and-Mr-Hyde-and-Other-Stories/Robert-Louis-Stevenson_text');" href="/w/strange-case-of-dr-jekyll-and-mr-hyde-and-other-stories-robert-louis-stevenson/1005907293;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593081317">The Strange Case of Dr. Jekyll&hellip;</a></div>
+
+by <a href="/b/contributor/robert-louis-stevenson/_/N-2kkt;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Robert Louis Stevenson</a><div id="gigya-rating-9781593081317" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593081317" class="hide-content" tabindex="0">Average rating: 3.8</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="3.8" alt="3.8">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-half"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/count-of-monte-cristo-alexandre-dumas/1100068698?ean=9781593081515" class="carousel-image-link" onclick="set_cookie('gridView_B&N Classics Bestsellers_Count-of-Monte-Cristo/Alexandre-Dumas_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593081515_p0_v1_s389x600.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view gft-crd-view" data-quickview-url="/w/count-of-monte-cristo-alexandre-dumas/1100068698?ean=9781593081515" data-work-id="1100068698">Quick View</a>
+</div>
+<div>
+<a aria-describedby="" class=" " onclick="set_cookie('gridView_B&N Classics Bestsellers_Count-of-Monte-Cristo/Alexandre-Dumas_text');" href="/w/count-of-monte-cristo-alexandre-dumas/1100068698;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593081515">The Count of Monte Cristo&hellip;</a></div>
+
+by <a href="/b/contributor/alexandre-dumas/_/N-2k3d;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Alexandre Dumas</a><div id="gigya-rating-9781593081515" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593081515" class="hide-content" tabindex="0">Average rating: 4.2</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="4.2" alt="4.2">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/little-women-louisa-may-alcott/1116668150?ean=9781593081089" class="carousel-image-link" onclick="set_cookie('gridView_B&N Classics Bestsellers_Little-Women/Louisa-May-Alcott_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593081089_p0_v4_s456x700.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view gft-crd-view" data-quickview-url="/w/little-women-louisa-may-alcott/1116668150?ean=9781593081089" data-work-id="1116668150">Quick View</a>
+</div>
+<div>
+<a aria-describedby="" class=" " onclick="set_cookie('gridView_B&N Classics Bestsellers_Little-Women/Louisa-May-Alcott_text');" href="/w/little-women-louisa-may-alcott/1116668150;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593081089">Little Women (Barnes & Noble&hellip;</a></div>
+
+by <a href="/b/contributor/louisa-may-alcott/_/N-2kg7;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Louisa May Alcott</a><div id="gigya-rating-9781593081089" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593081089" class="hide-content" tabindex="0">Average rating: 3.4</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="3.4" alt="3.4">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/the-picture-of-dorian-gray-oscar-wilde/1116668152?ean=9781593080259" class="carousel-image-link" onclick="set_cookie('gridView_B&N Classics Bestsellers_The-Picture-of-Dorian-Gray/Oscar-Wilde_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593080259_p0_v4_s446x700.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view gft-crd-view" data-quickview-url="/w/the-picture-of-dorian-gray-oscar-wilde/1116668152?ean=9781593080259" data-work-id="1116668152">Quick View</a>
+</div>
+<div>
+<a aria-describedby="" class=" " onclick="set_cookie('gridView_B&N Classics Bestsellers_The-Picture-of-Dorian-Gray/Oscar-Wilde_text');" href="/w/the-picture-of-dorian-gray-oscar-wilde/1116668152;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593080259">The Picture of Dorian Gray&hellip;</a></div>
+
+by <a href="/b/contributor/oscar-wilde/_/N-2kin;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Oscar Wilde</a><div id="gigya-rating-9781593080259" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593080259" class="hide-content" tabindex="0">Average rating: 4.1</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="4.1" alt="4.1">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</li>
+</ul>
+<ul>
+<li>
+<div class="product-image">
+<a href="/w/jane-eyre-charlotte-bronte/1116670758?ean=9781593081171" class="carousel-image-link" onclick="set_cookie('gridView_B&N Classics Bestsellers_Jane-Eyre/Charlotte-Bronte_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593081171_p0_v3_s452x700.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view gft-crd-view" data-quickview-url="/w/jane-eyre-charlotte-bronte/1116670758?ean=9781593081171" data-work-id="1116670758">Quick View</a>
+</div>
+<div>
+<a aria-describedby="" class=" " onclick="set_cookie('gridView_B&N Classics Bestsellers_Jane-Eyre/Charlotte-Bronte_text');" href="/w/jane-eyre-charlotte-bronte/1116670758;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593081171">Jane Eyre (Barnes & Noble&hellip;</a></div>
+
+by <a href="/s/%22Charlotte Bronte%22;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?Ntk=P_key_Contributor_List&Ns=P_Sales_Rank&Ntx=mode+matchall">Charlotte Bronte</a><div id="gigya-rating-9781593081171" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593081171" class="hide-content" tabindex="0">Average rating: 4.4</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="4.4" alt="4.4">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/narrative-of-the-life-of-frederick-douglass-an-american-slave-frederick-douglass/1116670483?ean=9781593080419" class="carousel-image-link" onclick="set_cookie('gridView_B&N Classics Bestsellers_Narrative-of-the-Life-of-Frederick-Douglass-an-American-Slave/Frederick-Douglass_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593080419_p0_v4_s455x700.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view gft-crd-view" data-quickview-url="/w/narrative-of-the-life-of-frederick-douglass-an-american-slave-frederick-douglass/1116670483?ean=9781593080419" data-work-id="1116670483">Quick View</a>
+</div>
+<div>
+<a aria-describedby="" class=" " onclick="set_cookie('gridView_B&N Classics Bestsellers_Narrative-of-the-Life-of-Frederick-Douglass-an-American-Slave/Frederick-Douglass_text');" href="/w/narrative-of-the-life-of-frederick-douglass-an-american-slave-frederick-douglass/1116670483;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593080419">Narrative of the Life of&hellip;</a></div>
+
+by <a href="/s/%22Frederick Douglass%22;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?Ntk=P_key_Contributor_List&Ns=P_Sales_Rank&Ntx=mode+matchall">Frederick Douglass</a><div id="gigya-rating-9781593080419" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593080419" class="hide-content" tabindex="0">Average rating: 3.9</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="3.9" alt="3.9">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-half"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/secret-garden-frances-hodgson-burnett/1100156315?ean=9781593082772" class="carousel-image-link" onclick="set_cookie('gridView_B&N Classics Bestsellers_Secret-Garden/Frances-Hodgson-Burnett_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593082772_p0_v4_s454x700.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view gft-crd-view" data-quickview-url="/w/secret-garden-frances-hodgson-burnett/1100156315?ean=9781593082772" data-work-id="1100156315">Quick View</a>
+</div>
+<div>
+<a aria-describedby="" class=" " onclick="set_cookie('gridView_B&N Classics Bestsellers_Secret-Garden/Frances-Hodgson-Burnett_text');" href="/w/secret-garden-frances-hodgson-burnett/1100156315;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593082772">The Secret Garden (Barnes &&hellip;</a></div>
+
+by <a href="/s/%22Frances Hodgson Burnett%22;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?Ntk=P_key_Contributor_List&Ns=P_Sales_Rank&Ntx=mode+matchall">Frances Hodgson Burnett</a><div id="gigya-rating-9781593082772" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593082772" class="hide-content" tabindex="0">Average rating: 4.1</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="4.1" alt="4.1">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/great-expectations-charles-dickens/1116627604?ean=9781593081164" class="carousel-image-link" onclick="set_cookie('gridView_B&N Classics Bestsellers_Great-Expectations/Charles-Dickens_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593081164_p0_v3_s450x700.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view gft-crd-view" data-quickview-url="/w/great-expectations-charles-dickens/1116627604?ean=9781593081164" data-work-id="1116627604">Quick View</a>
+</div>
+<div>
+<a aria-describedby="" class=" " onclick="set_cookie('gridView_B&N Classics Bestsellers_Great-Expectations/Charles-Dickens_text');" href="/w/great-expectations-charles-dickens/1116627604;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593081164">Great Expectations (Barnes &&hellip;</a></div>
+
+by <a href="/b/contributor/charles-dickens/_/N-2k2b;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01">Charles Dickens</a><div id="gigya-rating-9781593081164" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593081164" class="hide-content" tabindex="0">Average rating: 3.9</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="3.9" alt="3.9">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-half"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</li>
+<li>
+<div class="product-image">
+<a href="/w/crime-and-punishment-fyodor-dostoevsky/1116756319?ean=9781593080815" class="carousel-image-link" onclick="set_cookie('gridView_B&N Classics Bestsellers_Crime-and-Punishment/Fyodor-Dostoevsky_image');"><img class="full-shadow" src="//prodimage.images-bn.com/pimages/9781593080815_p0_v1_s390x600.jpg" alt="fpo"></a>
+<a href="#" data-modal-class="BN.Modal.Browse.Quickview" class="btn-quick-view gft-crd-view" data-quickview-url="/w/crime-and-punishment-fyodor-dostoevsky/1116756319?ean=9781593080815" data-work-id="1116756319">Quick View</a>
+</div>
+<div>
+<a aria-describedby="" class=" " onclick="set_cookie('gridView_B&N Classics Bestsellers_Crime-and-Punishment/Fyodor-Dostoevsky_text');" href="/w/crime-and-punishment-fyodor-dostoevsky/1116756319;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?ean=9781593080815">Crime and Punishment (Barnes &&hellip;</a></div>
+
+by <a href="/s/%22Fyodor Dostoevsky%22;jsessionid=36393888699DCA96E4EC09F1EB43C56B.prodny_store02-atgap01?Ntk=P_key_Contributor_List&Ns=P_Sales_Rank&Ntx=mode+matchall">Fyodor Dostoevsky</a><div id="gigya-rating-9781593080815" class="ratings-display">
+    <div class="gig-rating gig-clr gig-size-1">
+        <div class="gig-stars-container">
+            <div class="gig-rating-topbar">
+                <span id="avgRating9781593080815" class="hide-content" tabindex="0">Average rating: 4.2</span>
+                <span class="gig-rating-averageRating">Average rating:</span>
+                <span class="gig-rating-stars" title="4.2" alt="4.2">
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-full"></div>
+                    <div class=" gig-rating-star gig-rating-star-empty"></div>
+                        </span>
+            </div>
+            <div class="gig-rating-dimensions"></div>
+        </div>
+        <div class="gig-button-container gig-clr"></div>
+        </div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<!-- Internal Component Tracking - Begin -->
+<!-- Internal Component Tracking - End -->
+<!-- Internal Component Tracking - Begin -->
+<!-- Internal Component Tracking - End -->
+<section class="featuredCategories featured-subjects">
+<h2>More Ways to Explore</h2>
+<div class="featured-categories-container">
+<div class="featured-category">
+<figcaption>
+<a href="/b/barnes-noble-classics/fiction-literature-classics/american-fiction-literature-classics/_/N-rqvZ11hj" onclick="set_cookie('flc_More Ways to Explore_American Classics_text');">American Classics</a>
+</figcaption>
+<a href="/b/barnes-noble-classics/fiction-literature-classics/american-fiction-literature-classics/_/N-rqvZ11hj" onclick="set_cookie('flc_More Ways to Explore_American Classics_image');">
+<img src="//prodimage.images-bn.com/pimages/9781593082079_p0_v4_s118x184.jpg" class="full-shadow" alt="American Classics">
+</a>
+</div>
+<div class="featured-category">
+<figcaption>
+<a href="/b/barnes-noble-classics/fiction-literature-classics/ancient-fiction-literature-classics/_/N-rqvZ11hk" onclick="set_cookie('flc_More Ways to Explore_Ancient Literature_text');">Ancient Literature</a>
+</figcaption>
+<a href="/b/barnes-noble-classics/fiction-literature-classics/ancient-fiction-literature-classics/_/N-rqvZ11hk" onclick="set_cookie('flc_More Ways to Explore_Ancient Literature_image');">
+<img src="//prodimage.images-bn.com/pimages/9781593080099_p0_v4_s118x184.jpg" class="full-shadow" alt="Ancient Literature">
+</a>
+</div>
+<div class="featured-category">
+<figcaption>
+<a href="/b/barnes-noble-classics/fiction-literature-classics/english-irish-scottish-fiction-literature-classics/_/N-rqvZ11hn" onclick="set_cookie('flc_More Ways to Explore_British Classics_text');">British Classics</a>
+</figcaption>
+<a href="/b/barnes-noble-classics/fiction-literature-classics/english-irish-scottish-fiction-literature-classics/_/N-rqvZ11hn" onclick="set_cookie('flc_More Ways to Explore_British Classics_image');">
+<img src="//prodimage.images-bn.com/pimages/9781593081287_p0_v4_s118x184.jpg" class="full-shadow" alt="British Classics">
+</a>
+</div>
+<div class="featured-category">
+<figcaption>
+<a href="/b/barnes-noble-classics/fiction-literature-classics/european-fiction-literature-classics/_/N-rqvZ11ho" onclick="set_cookie('flc_More Ways to Explore_European Classics_text');">European Classics</a>
+</figcaption>
+<a href="/b/barnes-noble-classics/fiction-literature-classics/european-fiction-literature-classics/_/N-rqvZ11ho" onclick="set_cookie('flc_More Ways to Explore_European Classics_image');">
+<img src="//prodimage.images-bn.com/pimages/9781593081515_p0_v1_s118x184.jpg" class="full-shadow" alt="European Classics">
+</a>
+</div>
+</div>
+<div class="featured-categories-container">
+<div class="featured-category">
+<figcaption>
+<a href="/b/barnes-noble-classics/world-fiction/french-fiction/_/N-rqvZ1pkt" onclick="set_cookie('flc_More Ways to Explore_French Classics_text');">French Classics</a>
+</figcaption>
+<a href="/b/barnes-noble-classics/world-fiction/french-fiction/_/N-rqvZ1pkt" onclick="set_cookie('flc_More Ways to Explore_French Classics_image');">
+<img src="//prodimage.images-bn.com/pimages/9781593081515_p0_v1_s118x184.jpg" class="full-shadow" alt="French Classics">
+</a>
+</div>
+<div class="featured-category">
+<figcaption>
+<a href="/b/barnes-noble-classics/fiction/historical-fiction/_/N-rqvZ10nf" onclick="set_cookie('flc_More Ways to Explore_Historical Fiction_text');">Historical Fiction</a>
+</figcaption>
+<a href="/b/barnes-noble-classics/fiction/historical-fiction/_/N-rqvZ10nf" onclick="set_cookie('flc_More Ways to Explore_Historical Fiction_image');">
+<img src="//prodimage.images-bn.com/pimages/9781593081386_p0_v3_s118x184.jpg" class="full-shadow" alt="Historical Fiction">
+</a>
+</div>
+<div class="featured-category">
+<figcaption>
+<a href="/b/barnes-noble-classics/poetry/_/N-rqvZ1pqh" onclick="set_cookie('flc_More Ways to Explore_Poetry_text');">Poetry</a>
+</figcaption>
+<a href="/b/barnes-noble-classics/poetry/_/N-rqvZ1pqh" onclick="set_cookie('flc_More Ways to Explore_Poetry_image');">
+<img src="//prodimage.images-bn.com/pimages/9781593080518_p0_v4_s118x184.jpg" class="full-shadow" alt="Poetry">
+</a>
+</div>
+<div class="featured-category">
+<figcaption>
+<a href="/b/barnes-noble-classics/world-fiction/russian-fiction/_/N-rqvZ1ppr" onclick="set_cookie('flc_More Ways to Explore_Russian Classics_text');">Russian Classics</a>
+</figcaption>
+<a href="/b/barnes-noble-classics/world-fiction/russian-fiction/_/N-rqvZ1ppr" onclick="set_cookie('flc_More Ways to Explore_Russian Classics_image');">
+<img src="//prodimage.images-bn.com/pimages/9781593080815_p0_v1_s118x184.jpg" class="full-shadow" alt="Russian Classics">
+</a>
+</div>
+</div>
+</section>
+<div class="seo-block">
+<section>
+<p>Welcome to the definitive destination for classic books and literature. Barnes &amp; Noble&reg; Classics offer a wide selection of American classics, European classics, ancient classics, poetry classics, and more time-honored works from the literary canon. Each volume contains ancillary materials to give readers a thorough understanding of the work and author. Find the books that have changed history, inspired Hollywood, and entertained readers for centuries at Barnes &amp; Noble&reg;.</p>
+</section>
+</div>
+</section>
+<div class="clearer"></div>
+<div class="clearer"></div>
+<div class="global-footer content-node"><footer><div class="global-footer-promo-row"><section class="promo-container content-shadow clearer"><ul><li><div class="global-footer-promo global-footer-promo-1 parbase"><h2>Visit Your Local Store</h2><p>Find Author and Storytime Events</p><a href="http://stores.barnesandnoble.com" class="promo-go-main">Find a Store</a> </div></li><li><div class="global-footer-promo parbase global-footer-promo-2"><h2>The B&amp;N MasterCard®</h2><p>5% Back on All B&amp;N Purchases</p><a href="http://www.barnesandnoble.com/h/bn-mastercard" class="promo-go-main">Learn More</a> </div></li><li><div class="global-footer-promo parbase global-footer-promo-3"><h2>Barnes &amp; Noble Café</h2><p>Relax and Refuel</p><a href="http://www.barnesandnoble.com/h/cafe" class="promo-go-main">Visit BN Café</a> </div></li><li><div class="global-footer-promo parbase global-footer-promo-4"><h2>B&amp;N Membership</h2><p>Don't Miss Out on Savings</p><a href="http://www.barnesandnoble.com/membership" class="promo-go-main">Learn More</a> </div></li></ul></section></div><div class="global-footer-links-container"><section class="links-container clearer"><ul><li><div class="global-footer-link-group-1 global-footer-link-group"><h3>B&amp;N Services</h3><ul><li><a href="http://www.barnesandnoble.com/h/bn-advertising">Advertise</a></li><li><a href="http://affiliates.barnesandnoble.com">Affiliate Program</a></li><li><a href="https://help.barnesandnoble.com/app/publisher_author/list">Publisher &amp; Author Guidelines</a></li><li><a href="https://www.nookpress.com">Self-Publish with NOOK Press</a></li><li><a href="http://www.barnesandnoble.com/customer-service/bulk-order.jsp">Bulk Order Discounts</a></li><li><a href="http://www.barnesandnoble.com/membership/">B&amp;N Membership</a></li><li><a href="http://www.barnesandnoble.com/h/bn-mastercard">B&amp;N MasterCard</a></li><li><a href="https://www.barnesandnoble.com/account/kidsclub/">B&amp;N Kids&#039; Club</a></li><li><a href="http://www.barnesandnoble.com/h/bn-educators/">B&amp;N Educators</a></li><li><a href="http://www.barnesandnoble.com/h/bookfairs">B&amp;N Bookfairs</a></li></ul></div></li><li><div class="global-footer-link-group-2 global-footer-link-group"><h3>Shipping &amp; Delivery</h3><ul><li><a href="https://help.barnesandnoble.com/app/shipping_free_shipping/list">About Free Shipping</a></li><li><a href="https://help.barnesandnoble.com/app/shipping_free_shipping/list">About Shipping</a></li><li><a href="http://www.barnesandnoble.com/h/help/holiday-shipping">Holiday Shipping</a></li><li><a href="https://help.barnesandnoble.com/app/shipping_free_shipping/list">Shipping Rates</a></li></ul><h3>NOOK</h3><ul><li><a href="http://www.barnesandnoble.com/b/nook/_/N-1pbl">NOOK Tablets &amp; eReaders</a></li><li><a href="http://www.barnesandnoble.com/h/nook/apps"> NOOK Mobile Apps</a></li><li><a href="http://www.barnesandnoble.com/h/coupons-deals"> Special Offers</a></li><li><a href="https://www.facebook.com/nook">NOOK on Facebook</a></li><li><a href="https://twitter.com/nookbn">NOOK on Twitter</a></li></ul></div></li><li><div class="global-footer-link-group-3 global-footer-link-group"><h3>Quick Help</h3><ul><li><a href="https://help.barnesandnoble.com/">Customer Service</a></li><li><a href="http://www.barnesandnoble.com/account/">Order Status</a></li><li><a href="https://help.barnesandnoble.com/app/returns/list">Easy Returns</a></li><li><a href="http://www.barnesandnoble.com/h/product-recalls">Product Recalls</a></li><li><a href="http://www.barnesandnoble.com/h/ebook-settlement">Apple Settlement Guide</a></li></ul><h3>About Us</h3><ul><li><a href="http://www.barnesandnoble.com/h/help/about/barnesandnoble">About B&amp;N</a></li><li><a href="http://www.barnesandnobleinc.com/for_investors/for_investors.html">Investor Relations</a></li><li><a href="http://www.barnesandnobleinc.com/">Barnes &amp; Noble, Inc. </a></li><li><a href="http://careers.barnesandnoble.com">Careers at B&amp;N</a></li></ul></div></li><li><div class="global-footer-store-locator-access"><h3>Store &amp; Events </h3><em> Author Events, FREE Wi-Fi, and more </em> <a href="http://stores.barnesandnoble.com" class="btn-green btn-store-locator">Store Locator</a> </div><div class="global-footer-email-signup global-footer-email-sign-up"><h3>Be in the Know</h3><em>Sign up for savings, news, updates</em> <div class="error-msg" id="emailAddressErr"></div><div id="emailSignupDiv"><form autocomplete="off" method="post" data-messaging="#emailAddressErr" action="/xhr/email-signup-submit.jsp" id="emailSignupForm"><fieldset class="rs-tb emailAddr"><label for="emailAddr">Email Address</label> <input type="text" autocomplete="off" required="required" value="" name="email" maxlength="40" id="emailAddr" aria-invalid="true" class="" /> <span class="validation-icon"></span> </fieldset><input type="submit" style="float:right;" class="btn-green" value="Submit" /> <p role="alert" class="field-error-alert hide-content">Email field is invalid.</p></form></div></div><div class="global-footer-social-links"><ul class="social"><li><a href="https://www.facebook.com/barnesandnoble" class="facebook"><span>Facebook</span></a></li><li><a href="https://twitter.com/bnbuzz" class="twitter"><span>Twitter</span></a></li><li><a href="https://www.instagram.com/barnesandnoble/" class="instagram"><span>Instagram</span></a></li><li><a href="http://www.pinterest.com/barnesandnoble" class="pinterest"><span>Pinterest</span></a></li></ul></div></li></ul></section></div><div class="global-footer-legal"><section id="copyright-container" role="contentinfo" class="clearer"><ul><li><a href="http://www.barnesandnoble.com/h/help/about/terms-of-use">Terms of Use </a></li><li><a href="http://www.barnesandnoble.com/h/copyright-policy">Copyright & Trademark</a></li><li><a href="http://www.barnesandnoble.com/h/help/privacy-policy">Privacy Policy</a></li><li><a href="http://www.barnesandnoble.com/h/sitemap">Sitemap</a></li><li><a href="http://www.barnesandnoble.com/h/bn-accessibility-statement">Accessibility</a></li><li><a href="http://www.barnesandnoble.com/h/copyright-policy">© 1997-2016 Barnes & Noble Booksellers, Inc.<br /> 122 Fifth Avenue, New York, NY 10011 </a></li></ul></section></div></footer></div><script type="text/javascript">
+if(!$('body').hasClass('thank-you')) {
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-11110821-1', {'cookieDomain': 'barnesandnoble.com'});
+ga('send', 'pageview');
+}
+</script>
+<script src="//js.js-bn.com/static/release/js/vendor.js?v3.16.9"></script><script src="//js.js-bn.com/static/release/js/contrib.js?v3.16.9"></script><script src="//js.js-bn.com/static/release/js/modal.modals-browse.js?v3.16.9"></script><script type="text/javascript" src="//js.js-bn.com/static/js/js-messaging.js?v3.16.9"></script>
+<script src="//js.js-bn.com/static/release/js/bn.js?v3.16.9"></script><script>
+$.webshims.polyfill('es5 forms forms-ext');
+</script>
+<script type="text/javascript"
+src="//js.js-bn.com/static/js/sections/search/search.js?v3.16.9"></script>
+<script type="text/javascript"
+src="//js.js-bn.com/static/js/vendor/jquery.scrollpane.min.js?v3.16.9"></script>
+<script type="text/javascript"
+src="//js.js-bn.com/static/js/vendor/jquery.mousewheel.js?v3.16.9"></script>
+<script type="text/javascript"
+src="//js.js-bn.com/static/js/sections/pdp/swfobject2.js?v3.16.9"></script>
+<script type="text/javascript"
+src="//js.js-bn.com/static/js/sections/pdp/kitcloud.js?v3.16.9"></script>
+<script type="text/javascript"
+src="//js.js-bn.com/static/js/sections/pdp/flashdetect.js?v3.16.9"></script>
+<script type="text/javascript" src="//js.js-bn.com/static/js/js-countries.js?v3.16.9"></script>
+<script type="text/javascript" src="//js.js-bn.com/static/js/bn/bn.analytics.js?v3.16.9"></script>
+<script>
+
+var digitalData = {"product":[],"session":{"sessionID":"36393888699DCA96E4EC09F1EB43C56B","serverName":"prodny_store02"},"page":{"timestamp":"Sat Dec 10 14:26:04 EST 2016","category":{"primaryCategory":"barnes-noble-classics","subCategory":["barnes & noble classics"],"hierarchy":"/b/barnes-noble-classics/barnes & noble classics"},"pageInfo":{"pageType":"category","pageName":"category:barnes-noble-classics barnes & noble classics","language":"en","geoRegion":"US","breadCrumbs":["home","b","barnes-noble-classics","barnes & noble classics"],"ipAddress":"69.119.31.179"},"attributes":{"internalSearch":{"resultsCount":"0","corrections":"","type":"search"}}},"cart":{"price":{"shipping":0,"priceWithTax":0,"transationalTotal":0,"basePrice":0}}};
+
+if (typeof s_setP !== 'undefined') {
+s_setP('digitalData.component[1].componentInfo.componentName','promo_content');
+s_setP('digitalData.component[1].componentInfo.componentLocation','tcbp-toputilitycontent');
+s_setP('digitalData.component[1].componentInfo.primaryCategory','internal campaign');
+s_setP('digitalData.component[2].componentInfo.componentName','promo_content');
+s_setP('digitalData.component[2].componentInfo.componentLocation','tcbp-toputilitycontent');
+s_setP('digitalData.component[2].componentInfo.primaryCategory','internal campaign');
+s_setP('digitalData.component[3].componentInfo.componentName','promo_content');
+s_setP('digitalData.component[3].componentInfo.componentLocation','tcbp-toputilitycontent');
+s_setP('digitalData.component[3].componentInfo.primaryCategory','internal campaign');
+s_setP('digitalData.component[4].componentInfo.componentName','promo_content');
+s_setP('digitalData.component[4].componentInfo.componentLocation','tcbp-toputilitycontent');
+s_setP('digitalData.component[4].componentInfo.primaryCategory','internal campaign');
+s_setP('digitalData.component[5].componentInfo.componentName','ppod_topnav');
+s_setP('digitalData.component[5].componentInfo.componentLocation','tcbp-topnavcontent');
+s_setP('digitalData.component[5].componentInfo.primaryCategory','internal campaign');
+s_setP('digitalData.component[6].componentInfo.componentName','ppod_topnav');
+s_setP('digitalData.component[6].componentInfo.componentLocation','tcbp-topnavcontent');
+s_setP('digitalData.component[6].componentInfo.primaryCategory','internal campaign');
+s_setP('digitalData.component[7].componentInfo.componentName','ppod_topnav');
+s_setP('digitalData.component[7].componentInfo.componentLocation','tcbp-topnavcontent');
+s_setP('digitalData.component[7].componentInfo.primaryCategory','internal campaign');
+s_setP('digitalData.component[8].componentInfo.componentName','ppod_topnav');
+s_setP('digitalData.component[8].componentInfo.componentLocation','tcbp-topnavcontent');
+s_setP('digitalData.component[8].componentInfo.primaryCategory','internal campaign');
+s_setP('digitalData.component[9].componentInfo.componentName','ppod_topnav');
+s_setP('digitalData.component[9].componentInfo.componentLocation','tcbp-topnavcontent');
+s_setP('digitalData.component[9].componentInfo.primaryCategory','internal campaign');
+s_setP('digitalData.component[10].componentInfo.componentName','ppod_topnav');
+s_setP('digitalData.component[10].componentInfo.componentLocation','tcbp-topnavcontent');
+s_setP('digitalData.component[10].componentInfo.primaryCategory','internal campaign');
+s_setP('digitalData.component[11].componentInfo.componentName','ppod_topnav');
+s_setP('digitalData.component[11].componentInfo.componentLocation','tcbp-topnavcontent');
+s_setP('digitalData.component[11].componentInfo.primaryCategory','internal campaign');
+s_setP('digitalData.component[12].componentInfo.componentName','ppod_topnav');
+s_setP('digitalData.component[12].componentInfo.componentLocation','tcbp-topnavcontent');
+s_setP('digitalData.component[12].componentInfo.primaryCategory','internal campaign');
+s_setP('digitalData.component[13].componentInfo.componentName','ppod_topnav');
+s_setP('digitalData.component[13].componentInfo.componentLocation','tcbp-topnavcontent');
+s_setP('digitalData.component[13].componentInfo.primaryCategory','internal campaign');
+s_setP('digitalData.component[14].componentInfo.componentName','ppod_topnav');
+s_setP('digitalData.component[14].componentInfo.componentLocation','tcbp-topnavcontent');
+s_setP('digitalData.component[14].componentInfo.primaryCategory','internal campaign');
+s_setP('digitalData.component[15].componentInfo.componentName','ppod_topnav');
+s_setP('digitalData.component[15].componentInfo.componentLocation','tcbp-topnavcontent');
+s_setP('digitalData.component[15].componentInfo.primaryCategory','internal campaign');
+s_setP('digitalData.component[16].componentInfo.componentName','ppod_topnav');
+s_setP('digitalData.component[16].componentInfo.componentLocation','tcbp-topnavcontent');
+s_setP('digitalData.component[16].componentInfo.primaryCategory','internal campaign');
+s_setP('digitalData.component[17].componentInfo.componentName','ppod_topnav');
+s_setP('digitalData.component[17].componentInfo.componentLocation','tcbp-topnavcontent');
+s_setP('digitalData.component[17].componentInfo.primaryCategory','internal campaign');
+s_setP('digitalData.component[18].componentInfo.componentName','b&n classics bestsellers');
+s_setP('digitalData.component[18].componentInfo.componentLocation','tcbp-primarymaincontent');
+s_setP('digitalData.component[18].componentInfo.primaryCategory','internal campaign');
+s_setP('digitalData.component[19].componentInfo.componentName','flc_more ways to explore_');
+s_setP('digitalData.component[19].componentInfo.componentLocation','tcbp-primarymaincontent');
+s_setP('digitalData.component[19].componentInfo.primaryCategory','internal campaign');
+
+}
+$(document).ready(function(){
+if (typeof s_setP !== 'undefined') {
+
+BN.Analytics.Landing.init();
+
+BN.Analytics.Generic.GoogleAds();
+
+}
+});
+_satellite.pageBottom();
+</script>
+</body>
+</html>
+</section>
+</div>
