@@ -32,19 +32,25 @@ request(url, (error, response, body) => {
  	   	classic_title: classicTitle,
 		classic_author: classicAuthor,
 	    }
-  //		console.log(myJson);
             db.classics.insert(myJson);
 	   
 	});
 
-	//   console.log(books) // Show the HTML for the Google homepage.
     }
 })
 
 /// API ENDPOINTS ///
 
-app.get('/', (res, req) => {
-   req.send("hello");
+app.get('/classics', (req, res) => {
+    db.classics.find(function (err, docs) {
+      res.json(docs);
+})
+});
+
+app.get('/newreleases', (req, res) => {
+    db.news.find(function (err, docs){
+	res.json(docs);
+    })
 });
 
 app.listen(3000);
