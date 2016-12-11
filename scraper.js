@@ -1,57 +1,59 @@
-const request = require('request');
-const cheerio = require('cheerio');
 const express = require('express');
 const fs = require('fs');
 
-const mongojs = require('mongojs');
-const db = mongojs("mongodb://barnesadmin:barnes123@ds129018.mlab.com:29018/barnes-api", ["classics"]);
+const xray = require('x-ray');
+const xr = xray();
+
+const base = 'http://www.barnesandnoble.com/b/';
+const sort = '/_/N-1fZ29Zsoc?Ns=P_Sales_Rank';
+
+const url = 'http://www.barnesandnoble.com/b/biography/_/N-1fZ29Zsoc?Ns=P_Sales_Rank';
+const business = 'http://www.barnesandnoble.com/b/books/business/_/N-1fZ29Zsoc?Nrpp=20&Ns=P_Sales_Rank';
+const religion = 'www.barnesandnoble.com/b/religion/_/N-1fZ29Z17d6?Ns=P_Sales_Rank';
+const fiction = 'www.barnesandnoble.com/b/fiction/_/N-29Z10h8?Ns=P_Sales_Rank';
+
+// remove the 8q8z
 
 const app = express();
 
-const base =  "http://www.barnesandnoble.com/b/barnes-noble-classics/books/_/N-rqvZ8q8?Ns=P_Sales_Rank";
+(function getBiographies(url, pages){
 
+    console.log("scraping barnes and nobles .... ");
 
-request(base, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
-
-	//--------------------------//
-	const $ = cheerio.load(body);
-	//-------------------------//
-
-	const classic_books = $("li.clearer > ul > li");
- 
-
-	classic_books.each( function(i, cat){
-
-            let productImage =  $(this).find(".product-image img").attr("src");
-            let classicTitle =  $(this).find(".product-info-title a").text();
-            let classicAuthor = $(this).find(".contributors a").text();
-
-	    let myJson = {
-		product_image: productImage,
- 	   	classic_title: classicTitle,
-		classic_author: classicAuthor,
-	    }
-
-            db.classics.insert(myJson);
-	});
-
-    }
+    book: xr(url, '.resultsListContainer li.clearer > ul > li', [{
+	img: '.product-image img @src',
+	title: '.product-info-title a',
+	author: '.contributors a',
+	rating: 'span[class=gig-rating-stars]@title', 
+    }]) 
+	.paginate('.search-pagination li:last-child a@href')
+	.limit(pages)
+	.write("data.json")
 })
 
-/// API ENDPOINTS ///
 
-app.get('/classics', (req, res) => {
-    db.classics.find(function (err, docs) {
-      res.json(docs);
-})
-});
+/// API ENDPOINTS ////
 
-app.get('/newreleases', (req, res) => {
-    db.news.find(function (err, docs){
-	res.json(docs);
-    })
+app.get('/:genre', (req, res) => {
+
+    var genre = req.params.genre;   
+    var searchFor = base + genre + sort;
+    console.log(searchFor);
+
+
+    var json = xr('http://www.barnesandnoble.com/b/religion/_/N-1fZ29Z17d6?Ns=P_Sales_Rank', '.resultsListContainer li.clearer > ul > li', [{
+	img: '.product-image img @src',
+	title: '.product-info-title a',
+	author: '.contributors a',
+	rating: 'span[class=gig-rating-stars]@title', 
+    }]) 
+	.paginate('.search-pagination li:last-child a@href')
+	.limit(1)
+	.stream()
+
+    json.pipe(res);
 });
 
 app.listen(3000);
 console.log("running on port 3000...");
+
