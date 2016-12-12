@@ -1,5 +1,5 @@
 # barnes-nobles-api
-an api for barnes and nobles; base url: http://barnesandnobles.herokuapp.com/
+an api for barnes and nobles; base url: http://barnesandnobles.herokuapp.com/api/* your_end_point_here*
 You need to use the following endpoints to use this api otherwise you will be greeted to a 404 page.
 
 # endpoints
