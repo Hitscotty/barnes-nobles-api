@@ -70,7 +70,7 @@ function getBooks(url, pages){
 /////////////////////////////////////// API ENDPOINTS /////////////////////////////////////////////////
 
 app.get('/', (req, res) => {
-	res.send("index.html");
+	res.render("index.html");
 });
 
 
