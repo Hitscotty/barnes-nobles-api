@@ -4,6 +4,9 @@ html {
 }
 
 body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     top: 50%;
     -webkit-transform: translateY(-50%);
