@@ -14,6 +14,7 @@ const url = 'http://www.barnesandnoble.com/b/biography/_/N-1fZ29Zsoc?Ns=P_Sales_
 const business = 'http://www.barnesandnoble.com/b/books/business/_/N-1fZ29Zsoc?Nrpp=20&Ns=P_Sales_Rank';
 const religion = 'www.barnesandnoble.com/b/religion/_/N-1fZ29Z17d6?Ns=P_Sales_Rank';
 const fiction = 'www.barnesandnoble.com/b/fiction/_/N-29Z10h8?Ns=P_Sales_Rank';
+const search = 'http://www.barnesandnoble.com/s/';
 //--------------------------------------------------------------------------------------------------------//
 					// remove the 8q8z //
 
@@ -31,11 +32,14 @@ app.set('view engine', 'html');
  * scrapes all books on page and repeats by
  * n number of pages on each visited page
  */
-function getBooks(url, pages){
+function getBooks(query, pages){
 
     console.log("### scraping barnes and nobles ###");
 
-     xr('http://www.barnesandnoble.com/b/new-releases/_/N-1oyg', '.resultsListContainer li.clearer > ul > li', [{
+     var search = 'http://www.barnesandnoble.com/s/' + query;
+     
+     
+     xr(search, '.resultsListContainer li.clearer > ul > li', [{
 	img: '.product-image img @src',
 	title: '.product-info-title a',
 	author: '.contributors a',
@@ -49,7 +53,26 @@ function getBooks(url, pages){
 	.limit(1)
 }
 
-// debuging => getBooks('www.barnesandnoble.com/b/religion/_/N-1fZ29Z17d6?Ns=P_Sales_Rank', 2);
+
+function getISBN(query){ 
+     var book = xr(search + query , {
+        tit: 'title',
+	img: '#prodImage img @src',
+	title: '#prodSummary h1[itemprop=name]',
+	author: 'span[itemprop=author]',
+	description: '#truncatedOverview p',
+        pages: 'div[id=ProductDetailsTab] dl :nth-child(8)',
+        price: 'p[class=price] span',
+        isbn: 'div[id=ProductDetailsTab] dl :nth-child(2)',
+        sales_rank: 'div[id=ProductDetailsTab] dl :nth-child(10)',
+	rating: 'span[class=gig-rating-stars]@title', 
+        book_url: '.product-info-title a@href',
+    }) 
+
+}
+
+//getISBN('9781101996980');
+//getBooks('dan', 1);
 
 /*
  * returns all dictionary of all subjects and their unique url
@@ -77,8 +100,6 @@ function getBooks(url, pages){
 /////////////////////////////////////// API ENDPOINTS /////////////////////////////////////////////////
 app.get('/api/recent', (req, res) => {
 
-    var genre = req.params.genre;   
-
      var dbooks = xr('http://www.barnesandnoble.com/b/new-releases/_/N-1oyg', '.resultsListContainer li.clearer > ul > li', [{
 	img: '.product-image img @src',
 	title: '.product-info-title a',
@@ -97,21 +118,47 @@ app.get('/api/recent', (req, res) => {
 
 });
 
+app.get('/api/isbn/:number', (req, res) => {
+
+    var url = search + req.params.number;   
+  
+     var book = xr( url , {
+	img: '#prodImage img @src',
+	title: '#prodSummary h1[itemprop=name]',
+	author: 'span[itemprop=author]',
+	description: '#truncatedOverview p',
+        pages: 'div[id=ProductDetailsTab] dl :nth-child(8)',
+        price: 'p[class=price] span',
+        isbn: 'div[id=ProductDetailsTab] dl :nth-child(2)',
+        sales_rank: 'div[id=ProductDetailsTab] dl :nth-child(10)',
+	rating: 'span[class=gig-rating-stars]@title', 
+        book_url: '.product-info-title a@href',
+    }) 
+	.stream()
+
+    book.pipe(res);
+
+});
+
 
 app.get('/api/:genre/:pages', (req, res) => {
 
     var genre = req.params.genre;   
     var pages = req.params.pages;
+    var url = search + genre
+
     if(pages == undefined) pages = 1;
 
 
-     var nbooks = xr('http://www.barnesandnoble.com/b/religion/_/N-1fZ29Z17d6?Ns=P_Sales_Rank' , '.resultsListContainer li.clearer > ul > li', [{
+     var nbooks = xr( url , '.resultsListContainer li.clearer > ul > li', [{
 	img: '.product-image img @src',
 	title: '.product-info-title a',
 	author: '.contributors a',
 	description: xr('.product-info-title a@href', '#truncatedOverview p'),
         pages: xr('.product-info-title a@href', 'div[id=ProductDetailsTab] dl :nth-child(8)'),
         price: xr('.product-info-title a@href', 'p[class=price] span'),
+        isbn: xr('.product-info-title a@href' , 'div[id=ProductDetailsTab] dl :nth-child(2)'),
+        sales_rank: xr('.product-info-title a@href', 'div[id=ProductDetailsTab] dl :nth-child(10)'),
 	rating: 'span[class=gig-rating-stars]@title', 
         book_url: '.product-info-title a@href',
     }]) 
