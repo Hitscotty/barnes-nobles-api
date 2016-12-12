@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 
+var engine = require('consolidate');
 const xray = require('x-ray');
 const xr = xray();
 
@@ -17,8 +18,14 @@ const fiction = 'www.barnesandnoble.com/b/fiction/_/N-29Z10h8?Ns=P_Sales_Rank';
 					// remove the 8q8z //
 
 
+
+
 const app = express();
 app.use(express.static(__dirname+'/client'));
+app.set('views', __dirname + '/client/views');
+app.engine('html', engine.mustache);
+app.set('view engine', 'html');
+
 
 /* 
  * scrapes all books on page and repeats by
@@ -68,13 +75,7 @@ function getBooks(url, pages){
 
 
 /////////////////////////////////////// API ENDPOINTS /////////////////////////////////////////////////
-
-app.get('/', (req, res) => {
-	res.render("index.html");
-});
-
-
-app.get('/recent', (req, res) => {
+app.get('/api/recent', (req, res) => {
 
     var genre = req.params.genre;   
 
@@ -97,7 +98,7 @@ app.get('/recent', (req, res) => {
 });
 
 
-app.get('/:genre/:pages', (req, res) => {
+app.get('/api/:genre/:pages', (req, res) => {
 
     var genre = req.params.genre;   
     var pages = req.params.pages;
@@ -122,7 +123,7 @@ app.get('/:genre/:pages', (req, res) => {
 
 });
 
-app.get('/genres', (req, res) => {
+app.get('/api/genres', (req, res) => {
 
     var genres = xr('http://www.barnesandnoble.com/h/books/browse', '.links-container.browse.clearer ul li ul li', [{
 	subject: 'a',
@@ -133,6 +134,11 @@ app.get('/genres', (req, res) => {
     genres.pipe(res);
 
 });
+
+app.use((req, res, next) => {
+  res.status(404).render('error.html');
+});
+
 
 app.listen(process.env.PORT || 3000, function() {
     console.log("listening on 3000");

@@ -4,7 +4,7 @@
   "description": "an api for barnes and nobles",
   "main": "server.js",
   "scripts": {
-    "start":"node server.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,7 +19,11 @@
   "homepage": "https://github.com/Hitscotty/barnes-nobles-api#readme",
   "dependencies": {
     "cheerio": "^0.22.0",
+    "consolidate": "^0.14.5",
+    "ejs": "^2.5.5",
     "express": "^4.14.0",
+    "mustache": "^2.3.0",
+    "path": "^0.12.7",
     "start": "^4.0.2",
     "x-ray": "^2.3.1"
   }
