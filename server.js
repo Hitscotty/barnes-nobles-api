@@ -107,6 +107,8 @@ app.get('/api/recent', (req, res) => {
 	description: xr('.product-info-title a@href', '#truncatedOverview p'),
         pages: xr('.product-info-title a@href', 'div[id=ProductDetailsTab] dl :nth-child(8)'),
         price: xr('.product-info-title a@href', 'p[class=price] span'),
+        isbn: xr('.product-info-title a@href' , 'div[id=ProductDetailsTab] dl :nth-child(2)'),
+        sales_rank: xr('.product-info-title a@href', 'div[id=ProductDetailsTab] dl :nth-child(10)'),
 	rating: 'span[class=gig-rating-stars]@title', 
         book_url: '.product-info-title a@href',
     }]) 
@@ -145,7 +147,8 @@ app.get('/api/:genre/:pages', (req, res) => {
 
     var genre = req.params.genre;   
     var pages = req.params.pages;
-    var url = search + genre
+    var url = search + genre;
+  console.log("searching for " + genre );
 
     if(pages == undefined) pages = 1;
 
