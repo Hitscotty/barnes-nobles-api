@@ -1,5 +1,5 @@
 # barnes-nobles-api
-an api for barnes and nobles
+an api for barnes and nobles; base url: http://barnesandnobles.herokuapp.com/
 
 # endpoints
 
