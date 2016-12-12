@@ -43,7 +43,7 @@ app.use(express.static(__dirname+'/client'));
 /*
  * returns all dictionary of all subjects and their unique url
  */
-(function getSubjects(){
+(function getGenres(){
 
     console.log("### scraping subjects of barnes and nobles ###");
 
@@ -111,7 +111,7 @@ app.get('/:genre/:pages', (req, res) => {
 
 });
 
-app.get('/subjects', (req, res) => {
+app.get('/genres', (req, res) => {
 
     var json = xr('http://www.barnesandnoble.com/h/books/browse', '.links-container.browse.clearer ul li ul li', [{
 	subject: 'a',
