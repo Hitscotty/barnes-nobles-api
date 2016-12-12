@@ -20,25 +20,29 @@ const fiction = 'www.barnesandnoble.com/b/fiction/_/N-29Z10h8?Ns=P_Sales_Rank';
 const app = express();
 app.use(express.static(__dirname+'/client'));
 
-
 /* 
  * scrapes all books on page and repeats by
  * n number of pages on each visited page
  */
-(function getBooks(url, pages){
+function getBooks(url, pages){
 
     console.log("### scraping barnes and nobles ###");
 
-    book: xr(url, '.resultsListContainer li.clearer > ul > li', [{
+     xr('http://www.barnesandnoble.com/b/new-releases/_/N-1oyg', '.resultsListContainer li.clearer > ul > li', [{
 	img: '.product-image img @src',
 	title: '.product-info-title a',
 	author: '.contributors a',
+	description: xr('.product-info-title a@href', '#truncatedOverview p'),
+        pages: xr('.product-info-title a@href', 'div[id=ProductDetailsTab] dl :nth-child(8)'),
+        price: xr('.product-info-title a@href', 'p[class=price] span'),
 	rating: 'span[class=gig-rating-stars]@title', 
-    }]) 
+        book_url: '.product-info-title a@href',
+    }])(console.log) 
 	.paginate('.search-pagination li:last-child a@href')
-	.limit(pages)
-	.write("data.json")
-});
+	.limit(1)
+}
+
+// debuging => getBooks('www.barnesandnoble.com/b/religion/_/N-1fZ29Z17d6?Ns=P_Sales_Rank', 2);
 
 /*
  * returns all dictionary of all subjects and their unique url
@@ -70,23 +74,25 @@ app.get('/', (req, res) => {
 });
 
 
-app.get('/:genre', (req, res) => {
+app.get('/recent', (req, res) => {
 
     var genre = req.params.genre;   
-    var pages = req.params.pages;
-    if(pages == undefined) pages = 1;
 
-    var json = xr('http://www.barnesandnoble.com/b/religion/_/N-1fZ29Z17d6?Ns=P_Sales_Rank', '.resultsListContainer li.clearer > ul > li', [{
+     var dbooks = xr('http://www.barnesandnoble.com/b/new-releases/_/N-1oyg', '.resultsListContainer li.clearer > ul > li', [{
 	img: '.product-image img @src',
 	title: '.product-info-title a',
 	author: '.contributors a',
+	description: xr('.product-info-title a@href', '#truncatedOverview p'),
+        pages: xr('.product-info-title a@href', 'div[id=ProductDetailsTab] dl :nth-child(8)'),
+        price: xr('.product-info-title a@href', 'p[class=price] span'),
 	rating: 'span[class=gig-rating-stars]@title', 
+        book_url: '.product-info-title a@href',
     }]) 
 	.paginate('.search-pagination li:last-child a@href')
 	.limit(1)
 	.stream()
 
-    json.pipe(res);
+    dbooks.pipe(res);
 
 });
 
@@ -97,29 +103,34 @@ app.get('/:genre/:pages', (req, res) => {
     var pages = req.params.pages;
     if(pages == undefined) pages = 1;
 
-    var json = xr('http://www.barnesandnoble.com/b/religion/_/N-1fZ29Z17d6?Ns=P_Sales_Rank', '.resultsListContainer li.clearer > ul > li', [{
+
+     var nbooks = xr('http://www.barnesandnoble.com/b/religion/_/N-1fZ29Z17d6?Ns=P_Sales_Rank' , '.resultsListContainer li.clearer > ul > li', [{
 	img: '.product-image img @src',
 	title: '.product-info-title a',
 	author: '.contributors a',
+	description: xr('.product-info-title a@href', '#truncatedOverview p'),
+        pages: xr('.product-info-title a@href', 'div[id=ProductDetailsTab] dl :nth-child(8)'),
+        price: xr('.product-info-title a@href', 'p[class=price] span'),
 	rating: 'span[class=gig-rating-stars]@title', 
+        book_url: '.product-info-title a@href',
     }]) 
 	.paginate('.search-pagination li:last-child a@href')
 	.limit(pages)
 	.stream()
 
-    json.pipe(res);
+    nbooks.pipe(res);
 
 });
 
 app.get('/genres', (req, res) => {
 
-    var json = xr('http://www.barnesandnoble.com/h/books/browse', '.links-container.browse.clearer ul li ul li', [{
+    var genres = xr('http://www.barnesandnoble.com/h/books/browse', '.links-container.browse.clearer ul li ul li', [{
 	subject: 'a',
 	url: 'a@href',
     }])
 	.stream()
 
-    json.pipe(res);
+    genres.pipe(res);
 
 });
 
