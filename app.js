@@ -4,22 +4,18 @@ const fs = require('fs');
 const xray = require('x-ray');
 const xr = xray();
 
-
-					// IMPORTANT URLS //
-//--------------------------------------------------------------------------------------------------------//
 const base = 'http://www.barnesandnoble.com/b/';
 const sort = '/_/N-1fZ29Zsoc?Ns=P_Sales_Rank';
+
 const url = 'http://www.barnesandnoble.com/b/biography/_/N-1fZ29Zsoc?Ns=P_Sales_Rank';
 const business = 'http://www.barnesandnoble.com/b/books/business/_/N-1fZ29Zsoc?Nrpp=20&Ns=P_Sales_Rank';
 const religion = 'www.barnesandnoble.com/b/religion/_/N-1fZ29Z17d6?Ns=P_Sales_Rank';
 const fiction = 'www.barnesandnoble.com/b/fiction/_/N-29Z10h8?Ns=P_Sales_Rank';
-//--------------------------------------------------------------------------------------------------------//
-					// remove the 8q8z //
 
+// remove the 8q8z
 
 const app = express();
 app.use(express.static(__dirname+'/client'));
-
 
 /* 
  * scrapes all books on page and repeats by
@@ -43,7 +39,7 @@ app.use(express.static(__dirname+'/client'));
 /*
  * returns all dictionary of all subjects and their unique url
  */
-(function getSubjects(){
+function getSubjects(){
 
     console.log("### scraping subjects of barnes and nobles ###");
 
@@ -60,10 +56,10 @@ app.use(express.static(__dirname+'/client'));
 
   })
 	//book.pipe(process.stdout)
-});
+}
 
 
-/////////////////////////////////////// API ENDPOINTS /////////////////////////////////////////////////
+/// API ENDPOINTS ////
 
 app.get('/', (req, res) => {
 	res.send("index.html");

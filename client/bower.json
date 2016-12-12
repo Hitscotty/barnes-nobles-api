@@ -1,0 +1,21 @@
+{
+  "name": "client",
+  "homepage": "https://github.com/Hitscotty/barnes-nobles-api",
+  "authors": [
+    "Jonathan <jportorreal77@gmail.com>"
+  ],
+  "description": "api client",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "masonry": "desandro/masonry#^4.1.1"
+  }
+}

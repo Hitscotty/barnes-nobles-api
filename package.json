@@ -1,0 +1,26 @@
+{
+  "name": "barnes-nobles-api",
+  "version": "1.0.0",
+  "description": "an api for barnes and nobles",
+  "main": "app.js",
+  "scripts": {
+    "start":"node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hitscotty/barnes-nobles-api.git"
+  },
+  "author": "Jonathan Portorreal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hitscotty/barnes-nobles-api/issues"
+  },
+  "homepage": "https://github.com/Hitscotty/barnes-nobles-api#readme",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "express": "^4.14.0",
+    "start": "^4.0.2",
+    "x-ray": "^2.3.1"
+  }
+}
