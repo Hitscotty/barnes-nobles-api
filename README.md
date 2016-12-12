@@ -51,7 +51,7 @@ returns json with number of pages specified in new releases
   ... 
   ]
 ```
-## /:search/:pages
+## /search/:search/:pages
 the default number of pages the api returns is one; if you add `/fiction/30` it will return 
 30 pages worth of books in fiction *(about 600 books)*. This is scraping data so large requests will take time, but it will eventually scrape the data.  Below is a search for `/random/1`: 
 
